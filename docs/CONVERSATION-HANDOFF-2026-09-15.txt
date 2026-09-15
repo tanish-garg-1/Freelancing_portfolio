@@ -1,0 +1,607 @@
+================================================================================
+CONVERSATION HANDOFF  —  FREELANCE PORTFOLIO + DESIGN "BRAIN"
+Written: 2026-09-15 (late evening)          Author: Claude (Claude Code, desktop app)
+Purpose: paste or attach this whole file into a NEW chat so it can continue
+         exactly where this conversation stopped, with no lost context.
+================================================================================
+
+HOW TO USE THIS FILE IN A NEW CHAT
+----------------------------------
+1. Attach this file (or paste it) as the first message.
+2. Say: "Read this handoff fully, then read E:\Projects\freelancing_portfolio\HANDOFF.md
+   and C:\Users\tanis\.claude\projects\E--Projects-New-folder\memory\MEMORY.md, then
+   continue from section 12 (OPEN TASKS)."
+3. If the new chat is NOT on this same computer, use the share zip instead
+   (section 10) — all paths below then live inside the unzipped folder.
+
+TABLE OF CONTENTS
+  1.  Who the user is + how they like to work (VERY IMPORTANT)
+  2.  Machine, folders, tools and environment
+  3.  The "brain" (knowledge libraries, memory, skills) — what exists where
+  4.  The portfolio project — architecture and everything built before today
+  5.  Today's session, chronologically (everything that happened)
+        5.1  Reading the brain + skills review
+        5.2  3D portfolio research (26 live sites, 6 archetypes)
+        5.3  YouTube design-skills research (20 videos) + installing 191 skills
+        5.4  Measured inspiration research (15 Awwwards winners)
+        5.5  Building directions 1 + 3 + 5 on the site
+        5.6  Light theme made default
+        5.7  Dark-background images generated in ChatGPT
+        5.8  Saving images + share zip + HANDOFF.md
+        5.9  The plan page (artifact)
+  6.  Current design system of the site (exact tokens)
+  7.  Every file created or changed today (with paths)
+  8.  Undo backups
+  9.  Research findings worth remembering (numbers, patterns, sites)
+  10. Share bundle / zip
+  11. Known issues, gotchas and tool quirks
+  12. OPEN TASKS — exactly what to do next, in order
+  13. Full idea catalogs (motion 1–38, dark backgrounds 1–8, covers)
+  14. Commands cheat-sheet
+
+
+================================================================================
+1. WHO THE USER IS + HOW THEY LIKE TO WORK
+================================================================================
+- The user is building their own freelance portfolio (services: websites, CRM
+  dashboards, videos, AI chatbots) and treats Claude as a design partner they
+  "tutor" by sending design videos (Instagram reels, YouTube). They want Claude to
+  learn, save learnings to a "brain", and then create original designs from it.
+- Writing style of the user: short, casual, lowercase, some typos. They say things
+  like "implement 9", "undo it", "check the brain", "save these things in the brain".
+- PREFERENCES (all confirmed repeatedly — follow them):
+  * SHOW, DON'T DESCRIBE. Images over text. Reference-grid screenshots or ChatGPT
+    mockups. Plain link lists were explicitly rejected ("don't give me links, get me
+    reference images").
+  * NUMBERED OPTIONS. Give numbered choices; the user answers "implement 9", "7 and 11",
+    "1, 3 and 5". Covers were done as a numbered 2×2 grid of 4 options per image.
+  * GENERATE IMAGES WITH CHATGPT in the user's Chrome via the Claude-in-Chrome
+    extension (ChatGPT is logged in there as "Arpita sambher", plan shown as "Go").
+    If Chrome is disconnected, ASK the user to reconnect — do not silently substitute.
+  * RESEARCH FIRST, DON'T GENERATE BEFORE ASKED — except when the user explicitly
+    says "generate".
+  * REVERSIBLE CHANGES: before every feature copy the touched files into
+    `.undo/<feature>/` inside the project so "undo N" is cheap.
+  * NO GLOW anywhere (no neon halos, no coloured glowing shadows). They removed all
+    glows earlier. Colour lives on borders/work, not light effects.
+  * Explain changes after implementing, and why they're better.
+  * Save learnings to the brain (memory + creative-library + skills) every time.
+  * SELF-CONTAINED PROJECTS: each project in its own folder under E:\Projects with
+    runtimes and dependencies installed locally (portable Node in `.node\`, venvs
+    for Python). No global installs unless the user asks.
+- The user now PREFERS THE LIGHT THEME (made default today). They said the DARK
+  theme's background "seems so empty" → dark background images were generated.
+
+
+================================================================================
+2. MACHINE, FOLDERS, TOOLS, ENVIRONMENT
+================================================================================
+- Windows 11, shells: PowerShell 5.1 (no Join-String, no &&) and Git Bash.
+- Claude Code desktop app; the session's working directory: E:\Projects\New folder
+  (this folder holds the brain libraries, not the site).
+- Portfolio project: E:\Projects\freelancing_portfolio
+  * Portable Node: E:\Projects\freelancing_portfolio\.node\node.exe (npm.cmd there too).
+    Activate in PowerShell with:  . .\activate.ps1
+    In Git Bash `npm` is NOT on PATH — call `.node\npm.cmd` from PowerShell instead.
+- Dev preview (Claude desktop Browser pane): launch config "freelancing-portfolio" in
+  E:\Projects\New folder\.claude\launch.json → runs next dev on port 3000.
+- Chrome downloads land in E:\downloads (NOT C:\Users\tanis\Downloads).
+- Playwright + Chromium: in the webapp-testing skill venv. ALWAYS run scripts via
+  C:\Users\tanis\.claude\skills\webapp-testing\pw.cmd <script.py>
+  (it sets PLAYWRIGHT_BROWSERS_PATH=0; plain python fails to find browsers).
+- System Python 3.13 has Pillow (PIL); the Playwright venv does NOT.
+- yt-dlp (user Python Scripts) + ffmpeg (WinGet) available for YouTube captions/frames.
+- Claude in Chrome extension: device "Browser 1", deviceId
+  80b9c3d6-8109-420b-be6b-a18283ac318e. It disconnects often; fix with
+  list_connected_browsers → select_browser. Today's ChatGPT tab id was 2109801235.
+- skillui CLI installed self-contained at E:\Projects\skillui_tool (v1.3.4, installed
+  with --ignore-scripts). Run:
+  E:\Projects\freelancing_portfolio\.node\node.exe E:\Projects\skillui_tool\node_modules\skillui\dist\cli.js --url <site>
+
+
+================================================================================
+3. THE "BRAIN"
+================================================================================
+3a. MEMORY (auto-loaded each session)
+    C:\Users\tanis\.claude\projects\E--Projects-New-folder\memory\
+    - MEMORY.md (index)
+    - project_freelancing_portfolio.md  ← full project state (updated today)
+    - feedback_design_collaboration.md  ← images, numbered options, ChatGPT, undo, no glow
+    - reference_libraries.md            ← where libraries/boards/scripts live
+    - feedback_creative_tutoring_loop.md← video-teaching loop, report learnings back
+    - reference_installed_skills.md     ← all skills + caveats (updated today)
+    - feedback_self_contained_projects.md
+
+3b. CREATIVE LIBRARY  E:\Projects\New folder\creative-library\
+    - INDEX.md  ← start here; running index + "Recurring patterns" (updated today)
+    - videos/2026-09-03_*  (JS Mastery 3D batch, Ciao Energy, Crema Club, etc.)
+    - videos/2026-09-14_ui-design-fundamentals-youtube-batch.md
+    - videos/2026-09-15_cover-images-and-motion-youtube-batch.md
+    - videos/2026-09-15_3d-portfolio-sites-live-research.md        (NEW today)
+    - videos/2026-09-15_portfolio-inspo-dissection.md              (NEW today)
+    - principles/ui-design-fundamentals.md, principles/cover-image-craft.md
+    - implementation/react-three-gsap-creative-frontend.md (Recipes 1–14)
+    - workflow/claude-website-production-pipeline.md,
+      workflow/ai-assisted-engineering-judgment.md,
+      workflow/design-skills-landscape-2026-09.md                  (NEW today)
+    - prompting/ai-video-prompt-framework.md, higgsfield-*.md,
+      prompting/dark-background-texture-prompts.md                 (NEW today)
+    - boards/2026-09-15/ (NEW today): inspo_board_1.png, inspo_board_2.png,
+      inspo_board_3.png, specimen.png + specimen.html, grid_3d_worlds.png,
+      grid_editorial_webgl.png, grid_one_object.png, dark-bg-grid-A-textures-1-4.png
+    - data/2026-09-15/dissect.json, dissect_retry.json (raw measurements)
+    - scripts/ : extract_palette.py (path|box|step; use step 4 for dark UIs),
+      dissect_site_styles.py <list.txt> <out.json> <concurrency ≤2>,
+      contact_sheet.py out.png cols "img|label" ..., capture_webgl_sites.py,
+      recapture_after_loader.py, inspo_sites_2026-09-15.txt, 3d_sites_2026-09-15.txt
+
+3c. CLIENT ACQUISITION LIBRARY  E:\Projects\New folder\client-acquisition-library\
+    (INDEX.md + playbook.md — LinkedIn, cold email, prospecting). Not touched today.
+
+3d. SKILLS  C:\Users\tanis\.claude\skills\
+    - Own skill: web-motion-recipes (SKILL.md, recipes.md, code/, ideas-catalog.md with
+      ideas 1–38 — updated today).
+    - Earlier installs: impeccable (v4.3.1 = latest; engine 0.1.5), frontend-design,
+      webapp-testing (+pw.cmd), 14 Superpowers skills.
+    - TODAY (user approved "all"), 191 skills copied after vetting; log + pre-install
+      snapshot in C:\Users\tanis\.claude\skills-install-log\ (delete listed folders to undo):
+      * Taste (Leonxlnx/taste-skill, 13): design-taste-frontend, design-taste-frontend-v1,
+        gpt-taste, image-to-code, redesign-existing-projects, high-end-visual-design,
+        minimalist-ui, industrial-brutalist-ui, stitch-design-taste, imagegen-frontend-web,
+        imagegen-frontend-mobile, brandkit, full-output-enforcement
+      * UI/UX Pro Max (nextlevelbuilder, 7): ui-ux-pro-max, design-system, ui-styling, brand,
+        banner-design, slides, uiux-pro-design (RENAMED from "design" to avoid shadowing
+        the built-in design skill). Search: python ~/.claude/skills/ui-ux-pro-max/scripts/search.py "<q>" --design-system
+      * Garden (ConardLi): web-design-engineer (25 style recipes incl. field-io,
+        active-theory, resn-storytelling, pentagram, linear, aesop…)
+      * Anthropic official: theme-factory, canvas-design, brand-guidelines,
+        web-artifacts-builder (its init script runs `npm install -g pnpm` → avoid)
+      * Emil Kowalski (13): emil-design-eng, animate, animate-expo, review-animations,
+        improve-animations, find-animation-opportunities, animation-vocabulary,
+        apple-design, prototype, pick-ui-library, mobile-native, ask-sonner, write-swift
+      * CloudAI-X Three.js (10): threejs-fundamentals/geometry/materials/lighting/
+        textures/animation/loaders/shaders/postprocessing/interaction
+      * ScrollCraft (nateherkai): scroll-craft (media generation needs paid KIE_AI_API_KEY)
+      * freshtechbro claudedesignskills (22): gsap-scrolltrigger, react-three-fiber,
+        threejs-webgl, motion-framer, babylonjs-engine, aframe-webxr,
+        lightweight-3d-effects, playcanvas-engine, pixijs-2d, locomotive-scroll, barba-js,
+        react-spring-physics, animated-component-libraries, scroll-reveal-libraries,
+        animejs, lottie-animations, blender-web-pipeline, spline-interactive,
+        rive-interactive, substance-3d-texturing, web3d-integration-patterns, modern-web-design
+      * Vercel (4): web-design-guidelines (fetches rules remotely), vercel-react-view-transitions,
+        vercel-composition-patterns, vercel-react-best-practices
+      * AccessLint (5): accessibility-audit/diff/fix/inspect/scan — they expect an MCP server
+        (npx -y @accesslint/mcp) that is NOT registered yet.
+      * Owl-Listener designer-skills (111 process skills: research, IA, critique-*, laws of UX,
+        tokens, handoff…); its accessibility-audit renamed design-accessibility-audit.
+
+
+================================================================================
+4. THE PORTFOLIO PROJECT — ARCHITECTURE + EARLIER WORK
+================================================================================
+Stack: Next.js 16 App Router, TypeScript, GSAP 3.15, Lenis 1.3.26 (added today),
+React 19. No git (undo backups instead). Content = JSON in content/, every field
+optional (missing → element hidden).
+
+Folders:
+  app/            layout.tsx, page.tsx, globals.css (~1400 lines), not-found.tsx,
+                  about/page.tsx, work/[category]/page.tsx (+ case study route)
+  components/     ArcCarousel.tsx, CategoryBanner.tsx, FocusInfo.tsx, HomeExperience.tsx,
+                  Icon.tsx, LivingPreview.tsx, Media.tsx, ProjectGrid.tsx, RepelText.tsx,
+                  SiteNav.tsx, SocialDock.tsx, StaticHero.tsx, ThemeToggle.tsx,
+                  + NEW today: HeroMeta.tsx, IntroLoader.tsx, SmoothScroll.tsx
+  lib/            content.ts (only module reading content), links.ts, useReducedMotion.ts, visual.ts
+  content/        site.json, categories/{websites,crm-dashboards,videos,ai-chatbots}.json,
+                  projects/<category>/<slug>.json (placeholders; ai-chatbots has none → hidden)
+  design-assets/  dark-backgrounds/dark-bg-grid-A-textures-1-4.png (NEW today)
+  .undo/          backups (section 8)
+  HANDOFF.md      (NEW today) continue/share guide
+  README.md, activate.ps1, package.json, tsconfig.json, next.config.ts
+
+Built BEFORE today (2026-09-13/14/15 morning):
+- Home = fixed stage: static layer + infinite arc carousel of square category tiles.
+  Quarter arc from slightly left of bottom-middle up to right-middle; focused tile bigger;
+  phones get a bottom arc. Wheel/arrows/swipe rotate; Enter/click → tile expands (GSAP
+  overlay) into the category banner, then routes to /work/<slug>.
+- Pages: category grid (banner + tag filters), case studies, themed 404, About.
+- Theme toggle stored in localStorage "theme" (dark was default until today).
+- Impeccable critique: scored 22/36, all 5 issue groups fixed.
+- Motion: RepelText (hero name letters swell/push apart under cursor, Roboto Flex
+  wdth+wght axes) · idea 9 living tile (page scrolls inside focused tile, optional
+  `preview` field) · idea 7 3D tilt + sheen on focused tile · idea 11 logo "YN" unfolds
+  into full name · glows removed at user's request.
+- Cover-image task (in progress since 2026-09-14): user chose DEVICE MOCKUP covers, with
+  colours like Shakuro Dribbble shot 21131181's case-study photos (bright, sunlit,
+  colour-blocked studio photography: peach/butter/pink, emerald/blush…), different per
+  category, no glow. Websites 4-option grid generated in ChatGPT chat "Create Four Color
+  Variants" (1 peach #f4c7a8/butter #f2c14e/pink #e97aa0, 2 emerald #1fb57e/blush #f6c6c9/
+  butter #f4d35e, 3 powder blue #a9d3f0/tangerine #f5883b/cream #fff1d6, 4 lilac #c9b6ef/
+  lime #c8e65a/coral #ff6f59) — USER HAS NOT PICKED. CRM Dashboards prompt sent but result
+  unverified (Chrome disconnected). Videos + AI Chatbots not done.
+
+
+================================================================================
+5. TODAY'S SESSION, CHRONOLOGICALLY
+================================================================================
+
+5.1 Read the brain + skills review
+  - User: "check the brain … check what skills have you made … better research on 3d
+    portfolio websites".
+  - Read all memory files, creative-library INDEX, the JS Mastery 3D batch, the
+    React/Three/GSAP implementation reference, the 2026-09-15 cover/motion batch, and the
+    own web-motion-recipes skill (4 recipes + ideas 1–23).
+  - Gap found: all 3D-portfolio knowledge came from tutorial demos, none from real sites.
+
+5.2 3D portfolio research (live sites)
+  - Sources: CreativeDevJobs, Utsubo, hontran.dev juror list, Muzli top 100, Awwwards SOTD
+    (Léo Parpeix 14 Sep 2026, 7.69), Codrops (Blender camera path Jul 2026; Joseph
+    Santamaria's scroll-driven 3D world Apr 2026), DeepWiki on Bruno Simon folio-2025.
+  - Captured 26 sites with Playwright + SwiftShader WebGL (heavy ones timed out).
+  - Result → videos/2026-09-15_3d-portfolio-sites-live-research.md. SIX ARCHETYPES:
+      A playable world (Bruno Simon car, Jay Ransijn, Thibault Introvigne, JReyes MC, Worawork)
+      B scroll-on-rails diorama (bilal.show music-box room, Aimee's Papercraft World,
+        Sébastien Lempens scooter, Sleep Well Creative, Santamaria)
+      C floating island hub (Jordan Breton, weisdevice, Ameen Abdullah)
+      D one object with weight (Oryzo/Lusion cork coaster, Hubtown, Chipsa blob)
+      E editorial site + WebGL layer (p5aholic grain sphere, Léo Parpeix bee, Minh Pham,
+        Iventions, By-Kin)
+      F kinetic type as the 3D (Mat Voyce)
+    Recommendation given: D/E/F for a freelancer (clients skim <20 s; A/B hide the work).
+  - Boards sent to user: grid_3d_worlds.png, grid_editorial_webgl.png, grid_one_object.png.
+  - Techniques saved: CatmullRomCurve3 camera path + gsap.quickTo smoothing, free↔snap
+    scroll, NDC full-screen ink-bleed shader, Draco/KTX2/instancing, TSL for WebGPU,
+    enter gate for audio, social-proof loader.
+  - Motion ideas 24–32 added (3D ideas; section 13).
+
+5.3 YouTube design-skills research + installs
+  - User: "go to yt and check the designing skills you have and the ones you see … a good number of skills".
+  - 20 transcripts mined (AI LABS ×2, Jack Roberts ×2, Chase AI ×3, Nate Herk ×2, Flux
+    Academy, DesignCourse, Coding With Abbas, Brandon Melville/Taste, lustoykov/Impeccable,
+    Jason Lee, DesignCode Three.js, Griffin Wooldridge, Owain Lewis, Build Great Products).
+  - Mentions across videos: Three.js 15, animation 13, Taste 11, Claude Design 7, design
+    system 7, DESIGN.md 6, Impeccable 6 (dominant in 3), Rive 6, Stitch 5, UI/UX Pro Max 4…
+  - Impeccable already installed and already the latest release (4.3.1).
+  - Asked via numbered multi-select; USER ANSWERED "all" to all three groups.
+  - Cloned 11 repos, vetted (network/exec/hooks/prompt-injection sweep), copied 191 skills,
+    renamed 2 clashes. skillui CLI installed locally. Research saved:
+    workflow/design-skills-landscape-2026-09.md.
+
+5.4 Measured inspiration research
+  - User: "research for inspo in detail all the things animations colours and text font".
+  - Wrote a Playwright dissector that reads computed styles of every text element
+    (font, size, weight, tracking, colour), backgrounds, transitions/easings, :root vars,
+    libraries (GSAP/Lenis/Barba/Three), custom cursor count, reduced-motion CSS.
+  - Sites: Awwwards portfolio honors 2025–26. Full data on Pacôme Pertant, Lama Lama,
+    Elliott Mangham, Artiom Yakushev, Form&Fun, Jam Area, Olha Lazarieva, Podium, Adcker,
+    MERSI, Studio Null; frames for Caffè Design, Fiddle.Digital, Gianluca Gradogna.
+    (bleibtgleich.com now an unrelated blog — excluded; 10 others timed out twice.)
+  - Results → videos/2026-09-15_portfolio-inspo-dissection.md (+ INDEX patterns). Section 9.
+  - Sent: inspo_board_1/2/3.png and specimen.png (palettes A–G, type pairings T1–T3, easing curves).
+  - Offered 5 numbered directions:
+      1 refine the dark look (truer black, violet only as markers, mono labels, local time)
+      2 warm charcoal + cream with project rows + % loader
+      3 one serif-italic word in name/tagline
+      4 light editorial flip (full-width condensed name, [bracketed] mono nav)
+      5 motion upgrades (Lenis, typographic loader, section counters, Emil tokens)
+  - Motion ideas 33–38 added.
+
+5.5 BUILT directions 1 + 3 + 5 (user: "start working on the portfolio site 1, 3 and 5 … run the skills")
+  - Skills used: redesign-existing-projects (audit order), emil-design-eng (motion rules),
+    web-design-guidelines (post-build audit).
+  - Backup: .undo/redesign-1-3-5 (app, components, lib, package.json, lock, site.json)
+    + after-screenshots/.
+  - Installed lenis locally (npm via .node\npm.cmd).
+  - (1) tokens neutralised (see section 6); violet only via --marker; Hire pill and pressed
+    filter neutral (text-on-bg); hovers neutral; Geist Mono labels (.meta, tags, banner
+    meta, case-next label, kbd); HeroMeta line: "● AVAILABLE FOR NEW PROJECTS  YOUR CITY 17:44".
+  - (3) role in intro set in Instrument Serif italic 1.2em (.hero-role); loader name in serif italic.
+  - (5) --ease-out cubic-bezier(.23,1,.32,1), --ease-in-out (.77,0,.175,1), --press .97 on
+    .pill/.focus-open/.dock a/.filter; all old curves (.22,1,.36,1 and .2,.7,.2,1) replaced;
+    work-tile hover gated behind (hover:hover) and (pointer:fine); SmoothScroll (Lenis
+    autoRaf, lerp .1, off on "/" because the home wheel spins the arc, off for reduced motion);
+    IntroLoader: serif name centre + big Geist Mono % counter bottom-right, follows real
+    milestones (fonts ready 64 → window load 100), min 900 ms, max 2400 ms, then clip-path
+    curtain up 0.7 s; once per session (sessionStorage "intro-seen"); boot script adds
+    html.intro-seen before paint; hidden for reduced motion and noscript.
+  - Audit fixes: viewport themeColor, skip-to-content link (.skip-link, #content wrapper).
+    Focus hint sentence kept in body font (mono made it overflow under tiles).
+  - Verified: tsc clean, no console/server errors, dark + light checked, Lenis active on
+    inner pages, loader hidden on repeat, skip link works.
+
+5.6 Light theme made default (user: "i like the light theme more, so make the light theme default")
+  - Backup .undo/light-default (layout.tsx, globals.css, ThemeToggle.tsx).
+  - <html data-theme="light">, ThemeToggle initial state "light", viewport
+    themeColor #f5f4f1 + colorScheme "light dark", comments updated. Saved choices in
+    localStorage still win. Verified in preview.
+
+5.7 Dark-background images in ChatGPT (user: "the background of dark theme seems so empty so generate images on gpt using claude in chrome and give me various things and background textures")
+  - Chrome disconnected once; user said "try again"; reconnected.
+  - ChatGPT chat name: "Create Dark Texture Grid"
+    (https://chatgpt.com/c/6aa988e4-f7b0-83e8-9f39-13b988f26a62).
+  - Grid A (textures), image alt "Minimal Dark Texture Grid", 1672×941:
+      1 fine film grain + soft vignette (matte black paper)
+      2 faint halftone dot grid fading to edges
+      3 grainy near-black gradient into ink-violet bottom-right
+      4 hairline blueprint circles/arcs/diagonals
+  - Grid B (objects), image alt "Monochrome Abstract Quadrant Moodboard", 1672×941:
+      5 matte black textured stone "bean" sculpture, side-lit
+      6 black satin drapes on the right
+      7 grain-particle planet edge with sparkle dust
+      8 three torn black paper layers on a diagonal
+  - Prompts saved in creative-library/prompting/dark-background-texture-prompts.md.
+  - Suggested to user: 3 or 1 as base texture + 7 behind the arc. USER HAS NOT PICKED.
+
+5.8 Saving images + share zip (user: "just save the images … make a file of the portfolio so that i can share it over and continue my work")
+  - Grid A downloaded (E:\downloads) and copied to
+    E:\Projects\freelancing_portfolio\design-assets\dark-backgrounds\ and creative-library boards.
+  - Grid B DID NOT DOWNLOAD: Chrome blocks further automatic downloads from chatgpt.com
+    (multiple-downloads permission). Asked the user to click the download icon in the
+    ChatGPT image viewer (top-right) and allow if prompted, then say "saved".
+  - Wrote HANDOFF.md in the portfolio, and E:\Projects\make-portfolio-share.ps1.
+  - Built E:\Projects\freelancing_portfolio_share_2026-09-15.zip (9.33 MB, 152 files):
+    START-HERE.md, freelancing_portfolio/ (no node_modules/.next/.node/.npm-cache),
+    brain/{creative-library, client-acquisition-library, memory, skills/web-motion-recipes}.
+    Verified contents. Staging folder kept: E:\Projects\portfolio-share-2026-09-15.
+
+5.9 Plan page (user: "share me what is the plan and what design and all the things are we going to make")
+  - Built an HTML plan page in the site's own design language (Anton, Instrument Sans,
+    Instrument Serif italic, Geist Mono; light + dark tokens) with screenshots:
+    where it stands, design system (palettes, type, motion tokens), what each page becomes,
+    roadmap phases 0–4, motion menu, decisions needed. Published as a claude.ai Artifact
+    titled "Arc Portfolio Plan": https://claude.ai/artifact/USebJgfUrvNQXe2fjFt7wy (private until shared). Source:
+    scratchpad plan\index.html (temporary) — copy kept in the portfolio at
+    docs/plan/ (see section 10). Its content is summarised in sections 6 and 12.
+
+
+================================================================================
+6. CURRENT DESIGN SYSTEM OF THE SITE (exact)
+================================================================================
+LIGHT (default)                         DARK (toggle)
+  --bg          #f5f4f1                   #0b0b0c
+  --surface     #ffffff                   #141415
+  --text        #161616                   #f4f4f2
+  --body-text   #2b2a28                   #d4d4d0
+  --muted       #55534e                   #9a9a96
+  --faint       #6a6862                   #878680
+  --marker      #6d28d9                   #a78bfa
+  --line        rgba(22,22,22,.12)        rgba(255,255,255,.1)
+  --line-strong rgba(22,22,22,.26)        rgba(255,255,255,.2)
+  --shadow      rgba(40,36,30,.14)        rgba(0,0,0,.45)
+  --ph-1/--ph-2 #ffffff/#e8e6e1           #1c1c1f/#0d0d0e
+  Contrast checked: text 16.5:1 / 17.9:1, muted ≈7:1, faint ≥5:1 on both.
+  --accent #8b5cf6 (per-category override on tiles/banners via accentOf()).
+FONTS (next/font/google in app/layout.tsx):
+  --font-name    Roboto Flex variable (wdth 62, wght 760 at rest) — hero name + RepelText
+  --font-display Anton — titles (.display, letter-spacing -0.005em)
+  --font-body    Instrument Sans — body
+  --font-mono    Geist Mono — labels, 11px uppercase, +0.04em tracking
+  --font-serif   Instrument Serif italic — the role + loader name only
+MOTION:
+  --ease-out cubic-bezier(0.23,1,0.32,1) · --ease-in-out cubic-bezier(0.77,0,0.175,1)
+  --press 0.97 · hovers 150–300 ms · reveals 0.5–1.2 s · Lenis on inner pages
+LAYOUT: --nav-h 72px (60 phones, 56 short landscape), --gutter clamp(20px,4vw,56px),
+  --frame 1440px, --edge shared left edge, --radius 16px, tiles 18px radius.
+site.json NEW fields: "availability": "Available for new projects", "city": "Your City"
+  (placeholder), "timezone": "UTC" (placeholder, use IANA e.g. "Asia/Kolkata").
+
+
+================================================================================
+7. FILES CREATED OR CHANGED TODAY
+================================================================================
+Portfolio (E:\Projects\freelancing_portfolio):
+  NEW  components/HeroMeta.tsx, components/IntroLoader.tsx, components/SmoothScroll.tsx
+  NEW  HANDOFF.md, design-assets/dark-backgrounds/dark-bg-grid-A-textures-1-4.png
+  CHG  app/layout.tsx (fonts, boot script, loader, smooth scroll, skip link, viewport, light default)
+  CHG  app/globals.css (tokens, motion tokens, neutral chrome, mono labels, serif role,
+       hero-meta, intro-loader, Lenis rules, skip-link, reduced-motion loader rule)
+  CHG  components/StaticHero.tsx (HeroMeta + <em class="hero-role">)
+  CHG  components/ThemeToggle.tsx (light default)
+  CHG  lib/content.ts (Site: availability, city, timezone)
+  CHG  content/site.json (3 new fields)
+  CHG  package.json/package-lock.json (lenis ^1.3.26)
+Elsewhere:
+  E:\Projects\make-portfolio-share.ps1, E:\Projects\freelancing_portfolio_share_2026-09-15.zip,
+  E:\Projects\portfolio-share-2026-09-15\ (staging), E:\Projects\skillui_tool\,
+  E:\Projects\CONVERSATION-HANDOFF-2026-09-15.txt (this file),
+  creative-library files listed in 3b, memory files in 3a, skills in 3d,
+  C:\Users\tanis\.claude\skills-install-log\before-2026-09-15.json + install-2026-09-15.json
+
+
+================================================================================
+8. UNDO BACKUPS (E:\Projects\freelancing_portfolio\.undo\)
+================================================================================
+  living-tile/      before idea 9
+  tile-tilt/        before idea 7
+  logo-expand/      before idea 11
+  remove-glow/      before glows were removed
+  redesign-1-3-5/   before today's redesign (+ after-screenshots/: 0_loader, 1_home_dark,
+                    2_home_light, 3_category_dark)
+  light-default/    before light became default
+To undo: copy that folder's files back over the project (and for redesign-1-3-5 also
+remove the 3 new components + run npm install to drop lenis if desired).
+
+
+================================================================================
+9. RESEARCH FINDINGS WORTH REMEMBERING
+================================================================================
+Measured on Awwwards portfolio winners (2026-09-15):
+- Grounds: nobody uses pure #000/#fff as the only pair. Dark #0a0a0a/#121212/#1a1c1c;
+  light warm off-whites #f7f7f7/#efedea/#ede7de/#fefff8.
+- Near-monochrome + ≤1 accent used tiny (Mangham violet #5e2bff dots only; Jam Area red
+  cursor dot #e0110f). Colour comes from project thumbnails.
+- Type: grotesk + mono (mono for all metadata 10–12px caps) OR grotesk + one serif-italic
+  word. Display tracking always negative −2% to −5% (Pacôme −4px@80px, Form&Fun
+  −2.88px@101px, Lama Lama −1.44px@72px). Huge scale jumps (Jam Area 15/21/159/339px).
+- Motion: Lenis on 9/10; GSAP on 5/10; SplitType 2; Barba 1. Easings all strong ease-out:
+  .16,1,.3,1 (Podium) · .19,1,.22,1 expo (Jam Area) · .23,1,.32,1 (Form&Fun = Emil) ·
+  .39,.575,.565,1 (Mangham) · .11,.82,.39,.92 (Olha); page moves .9,0,.1,1 (Adcker) or
+  .5,0,0,1 (Studio Null, 0.8 s). Hovers 0.2–0.3 s, reveals 0.5–1.25 s. Only 2/10 had
+  reduced-motion CSS. Custom cursor on 6/10.
+- Loaders are typographic: % counter + dot (Podium), % alone (Lama Lama),
+  "*( [cycling image] ) 31%" that previews the hero (Adcker), 3D mascot + one line (Pacôme),
+  "ENTER / Enter site without audio" gate (Studio Null).
+- Layout moves: project rows with mono chips + "( + )" (Lama Lama); mono info grid with local
+  time "LON [18:15]", "Available September 2026", bracket buttons ⌜SCHEDULE CALL⌟ (Mangham);
+  sans + serif name edge to edge (Yakushev); photos inside headline brackets (Adcker,
+  Gradogna "THROUGH THIS [photo] LENS"); scattered letters reassembling on scroll (Olha);
+  floating copper project card on split photos + film grain (MERSI); LIST VIEW toggle (Podium).
+- Free font stand-ins: Neue Montreal → Geist (85%)/Inter (88%)/DM Sans; Suisse → Inter (90%);
+  free faces winners use: Sofia Sans Condensed, Spline Sans Mono, Switzer (Fontshare), Kumbh Sans.
+- UI/UX Pro Max generic suggestion (Brutalism, #000, Archivo + Space Grotesk, back.out bounce)
+  was REJECTED in favour of measured data.
+- Emil rules: never ease-in for UI; UI ≤300 ms; never animate from scale(0) (start .95);
+  :active scale .97; asymmetric enter/exit; stagger 30–80 ms; hover effects only under
+  (hover:hover) and (pointer:fine).
+3D: juror rule "art direction gives it a reason to exist, directed motion gives it life,
+performance keeps it alive on real devices"; winners commit to ONE hard idea.
+Skills landscape: "direction before code" (interview first), "reference > adjectives",
+loop = generate → screenshot → critique → polish; don't stack conflicting taste skills;
+Snyk found prompt injection in 36% of community skills (vet before installing).
+
+
+================================================================================
+10. SHARE BUNDLE / ZIP
+================================================================================
+  Build/rebuild:  powershell -ExecutionPolicy Bypass -File E:\Projects\make-portfolio-share.ps1
+  Output:         E:\Projects\freelancing_portfolio_share_<yyyy-MM-dd>.zip
+  Contains:       START-HERE.md (copy of HANDOFF.md), freelancing_portfolio/ (source, content,
+                  .undo, design-assets, docs), brain/ (creative-library, client-acquisition-library,
+                  memory, skills/web-motion-recipes).
+  Excludes:       node_modules, .next, .node, .npm-cache, out, tsbuildinfo, next-env.d.ts
+  Run on a new PC: install Node 20+ (or portable), `npm install`, `npm run dev`.
+  NOTE: rebuild the zip after grid B is saved, and after this handoff file is added.
+
+
+================================================================================
+11. KNOWN ISSUES, GOTCHAS, TOOL QUIRKS
+================================================================================
+- Grid B (dark objects 5–8) is NOT saved to disk yet (Chrome multiple-download block).
+- site.json city/timezone are placeholders ("Your City"/"UTC").
+- All project content is placeholder text; ai-chatbots has no projects (hidden on arc).
+- AccessLint skills need an MCP server that isn't registered.
+- Claude-in-Chrome `save_to_disk` screenshots don't return a usable path. To show ChatGPT
+  images: overlay the <img> full-screen via JS and screenshot, or download (ask first).
+- Chrome downloads go to E:\downloads.
+- Headless dissection: keep concurrency ≤2 or heavy sites time out; some sites need a 20 s
+  wait + click to get past loaders.
+- Bash heredocs containing certain quoting can break in this tool → write Python patch
+  scripts to files and run them instead.
+- The Edit tool refuses a file changed by a script since it was last read → re-read first
+  or use an exact-match python replace.
+- PowerShell 5.1: no `&&`, no Join-String, no ternary.
+- Browser pane (in-app) hover tool doesn't fire pointermove; test pointer effects by
+  dispatching PointerEvent in JS. Background tabs throttle rAF.
+- Sales MCP connectors (HubSpot, Slack, Notion, Zoom…) require sign-in via claude.ai
+  connector settings — unrelated to this work.
+
+
+================================================================================
+12. OPEN TASKS — WHAT TO DO NEXT, IN ORDER
+================================================================================
+ 1. SAVE GRID B: user clicks download in the ChatGPT image viewer (chat "Create Dark Texture
+    Grid") → file lands in E:\downloads → copy to design-assets/dark-backgrounds/
+    dark-bg-grid-B-objects-5-8.png and creative-library/boards/2026-09-15/ → rebuild zip.
+ 2. USER PICKS DARK BACKGROUND (1–8, or combo like "3 + 7"). Then: regenerate the chosen
+    cell alone at 2560×1440 in ChatGPT (same prompt wording, in the prompts file), download
+    (ask), compress to WebP/AVIF ≤250 KB into public/backgrounds/dark-<name>.webp, apply ONLY
+    under [data-theme="dark"] .home with --bg fallback, keep text readable, backup
+    .undo/dark-background first. Textures 1–2 could be pure CSS/SVG noise instead.
+ 3. FILL REAL CONTENT (Phase 1): name, role, intro, about, email, socials, city, timezone,
+    availability; 2–3 real projects per category with summary, tags, results, thumbnails.
+ 4. CATEGORY COVERS: user picks one of 4 per category (Websites grid ready in chat "Create
+    Four Color Variants"); generate CRM Dashboards (verify), Videos, AI Chatbots; save to
+    public/covers/, set "cover" in content/categories/*.json; check on arc (living tile
+    covers the focused tile, so covers show on neighbours + category grid).
+ 5. PAGE UPGRADES (Phase 2): case study in "showcase" order (outcome + visuals within 20 s,
+    long text behind read-more); About page with portrait, services, process, clients;
+    grid ↔ list toggle on category pages (idea 37, View Transitions).
+ 6. MOTION PICKS (Phase 3) — recommended order 33 → 37 → 13, then 5, 34; later 22, 35, 6,
+    26, 24. One feature at a time with an .undo backup each.
+ 7. LAUNCH (Phase 4): image compression/perf budget (60 fps mid-range phones), accessibility
+    audit (register AccessLint MCP or use impeccable audit), OG share image + favicon,
+    deploy to Vercel + domain, simple analytics.
+ 8. Keep saving learnings to memory + creative-library + web-motion-recipes after each step.
+
+
+================================================================================
+13. FULL IDEA CATALOGS
+================================================================================
+MOTION IDEAS (numbers the user uses; from ~/.claude/skills/web-motion-recipes/ideas-catalog.md)
+  1  Cursor glow blob (open; conflicts with no-glow rule)
+  2  Loading intro counter + name draws hairline→bold (open)
+  3  Tagline sliding through the name, mix-blend difference (open)
+  4  Bar-wipe page transition (open)
+  5  Title letters roll in on category change (RECOMMENDED)
+  6  Magnetic buttons (later)
+  7  3D tilt + sheen on focused tile (BUILT)
+  8  Arc motion stretch/skew with velocity (open)
+  9  Living tile (BUILT)
+  10 Availability badge with pulsing dot (partly covered by HeroMeta)
+  11 Logo YN → full name (BUILT)
+  12 Drifting canvas particles following the arc (open)
+  13 Button text slide-swap + fill sweep (RECOMMENDED)
+  14 Spotlight reveal mask under cursor (open)
+  15 Word-by-word intro from blur (open)
+  16 Tilted name tag on hover (spring 500 ms, stiffness 636, damping 24)
+  17 Shimmer conic stroke on focused tile/CTA (glow-free)
+  18 Delayed tooltip 1 s on icon buttons
+  19 Text hover pop-out image
+  20 Card-stack swipe on mobile
+  21 Bendy press button tilt 4–6°
+  22 Hand-drawn accents (scribble underline) (later)
+  23 Scroll-scrubbed case study with Lenis + sticky media
+  24 Arc as a real 3D path (CatmullRomCurve3 + quickTo) (later)
+  25 Grain particle sphere behind the name
+  26 One 3D device showing focused category on its screen (later)
+  27 Pokeable 3D mascot
+  28 Ink-bleed shader transition on tile expand
+  29 About page as scroll-on-rails diorama
+  30 Social-proof loader (logos while loading)
+  31 Kinetic type stretching with scroll velocity
+  32 "Lite mode" toggle to switch 3D off
+  33 Loader as a trailer: *( cycling covers ) % (RECOMMENDED; simple % version BUILT)
+  34 Photos inside a headline (RECOMMENDED, About)
+  35 Scattered letters reassemble on scroll (later)
+  36 Mono metadata layer: availability, city, live time (BUILT)
+  37 Grid ↔ list view toggle (RECOMMENDED)
+  38 Lenis + Emil motion tokens site-wide (BUILT)
+
+DARK BACKGROUND OPTIONS: 1 film grain · 2 dot grid · 3 grainy gradient → ink-violet ·
+  4 blueprint lines · 5 black stone · 6 black silk · 7 particle planet edge · 8 torn black paper.
+  Suggested: 3 or 1 base + 7 behind the arc. NOT PICKED.
+
+COVER DIRECTION: device mockups; bright sunlit colour-blocked studio photo colours per category;
+  4 options per category as a numbered 2×2 ChatGPT grid; Websites grid options listed in section 4.
+
+ROADMAP (plan page): Phase 0 Foundation & look (DONE) · Phase 1 Real content & imagery (NEXT) ·
+  Phase 2 Page upgrades · Phase 3 Signature motion · Phase 4 Launch.
+
+DECISIONS NEEDED FROM USER: dark background number · cover pick per category · motion picks ·
+  real details/projects.
+
+
+================================================================================
+14. COMMANDS CHEAT-SHEET
+================================================================================
+  Run the site (PowerShell):
+    cd E:\Projects\freelancing_portfolio ; . .\activate.ps1 ; npm run dev
+  Typecheck:
+    E:\Projects\freelancing_portfolio\.node\node.exe node_modules\typescript\bin\tsc --noEmit
+  Install a package locally:
+    E:\Projects\freelancing_portfolio\.node\npm.cmd install <pkg> --cache E:\Projects\freelancing_portfolio\.npm-cache
+  Rebuild share zip:
+    powershell -ExecutionPolicy Bypass -File E:\Projects\make-portfolio-share.ps1
+  Playwright script:
+    C:\Users\tanis\.claude\skills\webapp-testing\pw.cmd <script.py>
+  Dissect sites:
+    pw.cmd "E:\Projects\New folder\creative-library\scripts\dissect_site_styles.py" list.txt out.json 2
+  Contact sheet:
+    python "E:\Projects\New folder\creative-library\scripts\contact_sheet.py" out.png 2 "img.png|Label" ...
+  UI/UX Pro Max design system:
+    python C:\Users\tanis\.claude\skills\ui-ux-pro-max\scripts\search.py "freelance portfolio" --design-system
+  YouTube captions:
+    yt-dlp --skip-download --write-auto-subs --sub-langs "en-orig,en" --sub-format vtt -o "%(id)s.%(ext)s" <ids>
+
+================================================================================
+END OF HANDOFF
+================================================================================
