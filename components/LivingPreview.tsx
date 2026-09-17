@@ -5,6 +5,7 @@ type Props = {
   /** Tall screenshot of real work. Without one, a sketched page in the category colour stands in. */
   src?: string;
   accent?: string;
+  accentLight?: string;
 };
 
 /**
@@ -12,9 +13,18 @@ type Props = {
  * the project. Purely decorative, so it is hidden from screen readers. CSS only runs the scroll
  * while the tile is focused.
  */
-export default function LivingPreview({ src, accent }: Props) {
+export default function LivingPreview({ src, accent, accentLight }: Props) {
   return (
-    <div className="living" aria-hidden="true" style={{ "--tile-accent": accentOf(accent) } as CSSProperties}>
+    <div
+      className="living"
+      aria-hidden="true"
+      style={
+        {
+          "--tile-accent": accentOf(accent),
+          ...(accentLight ? { "--tile-accent-light": accentOf(accentLight) } : {}),
+        } as CSSProperties
+      }
+    >
       {src ? (
         <img className="living-shot" src={src} alt="" loading="lazy" draggable={false} />
       ) : (

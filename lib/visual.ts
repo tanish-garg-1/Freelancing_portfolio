@@ -1,3 +1,5 @@
+import type { CSSProperties } from "react";
+
 export const DEFAULT_ACCENT = "#8b5cf6";
 export const MOBILE_BREAKPOINT = 768;
 
@@ -13,8 +15,21 @@ export const BANNER = { desktopVh: 52, mobileVh: 42, desktopMin: 340, mobileMin:
 /** DOM id of the temporary element that carries the expanding tile from home to the category page. */
 export const EXPAND_OVERLAY_ID = "arc-expand-overlay";
 
+const isHex = (value?: string): value is string => !!value && /^#[0-9a-f]{6}$/i.test(value);
+
 export function accentOf(accent?: string) {
-  return accent && /^#[0-9a-f]{6}$/i.test(accent) ? accent : DEFAULT_ACCENT;
+  return isHex(accent) ? accent : DEFAULT_ACCENT;
+}
+
+/**
+ * Inline style for an accent scope. `--accent` drives the dark theme; `--accent-light`, when the
+ * category has one, replaces it in the light theme (see --accent-now in globals.css).
+ */
+export function accentStyle(accent?: string, accentLight?: string) {
+  return {
+    "--accent": accentOf(accent),
+    ...(isHex(accentLight) ? { "--accent-light": accentLight } : {}),
+  } as CSSProperties;
 }
 
 /**

@@ -5,12 +5,13 @@ type Props = {
   categories: Category[];
   index: number;
   onOpen: () => void;
-  onJump: (index: number) => void;
   /** One-time swipe hint for touch devices. */
   touchHint: boolean;
 };
 
-export default function FocusInfo({ categories, index, onOpen, onJump, touchHint }: Props) {
+const pad = (n: number) => String(n).padStart(2, "0");
+
+export default function FocusInfo({ categories, index, onOpen, touchHint }: Props) {
   const category = categories[index];
   const count = category.projectCount;
 
@@ -31,18 +32,12 @@ export default function FocusInfo({ categories, index, onOpen, onJump, touchHint
         </button>
 
         {categories.length > 1 && (
-          <div className="arc-dots" role="group" aria-label="Choose a category">
-            {categories.map((c, i) => (
-              <button
-                key={c.slug}
-                type="button"
-                className="arc-dot"
-                aria-label={`Show ${c.title}`}
-                aria-current={i === index ? "true" : undefined}
-                onClick={() => onJump(i)}
-              />
-            ))}
-          </div>
+          <p className="arc-count meta tabular">
+            <span className="arc-count-now">{pad(index + 1)}</span>
+            <span aria-hidden="true"> / </span>
+            <span className="sr-only"> of </span>
+            {pad(categories.length)}
+          </p>
         )}
       </div>
 

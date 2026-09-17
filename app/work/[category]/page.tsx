@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import type { CSSProperties } from "react";
 import { notFound } from "next/navigation";
 import CategoryBanner from "@/components/CategoryBanner";
 import ProjectGrid from "@/components/ProjectGrid";
 import { getCategories, getCategory, getProjects, getSite } from "@/lib/content";
 import { contactHref } from "@/lib/links";
-import { accentOf } from "@/lib/visual";
+import { accentStyle } from "@/lib/visual";
 
 type Params = Promise<{ category: string }>;
 
@@ -27,7 +26,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
     <main
       className="category-page"
       data-accent-scope=""
-      style={{ "--accent": accentOf(category.accent) } as CSSProperties}
+      style={accentStyle(category.accent, category.accentLight)}
     >
       <CategoryBanner
         title={category.title}

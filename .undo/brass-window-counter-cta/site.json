@@ -1,0 +1,18 @@
+{
+  "name": "Your Name",
+  "role": "Freelance developer",
+  "intro": "I build websites, CRM dashboards, videos, and AI chatbots that help small businesses grow.",
+  "availability": "Available for new projects",
+  "city": "Your City",
+  "timezone": "UTC",
+  "stats": ["24 projects", "9 clients", "4.9 stars"],
+  "about": "Placeholder about text. Write a few lines about yourself here, or delete this line to hide the About page.",
+  "email": "hello@example.com",
+  "whatsapp": "",
+  "socials": {
+    "linkedin": "",
+    "instagram": "",
+    "github": "",
+    "x": ""
+  }
+}

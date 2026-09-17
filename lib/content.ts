@@ -20,7 +20,11 @@ export type Site = {
   /** IANA time zone such as "Europe/London"; the owner's local time is shown next to the city. */
   timezone?: string;
   about?: string;
+  /** Short proof points shown in one mono line on the home page, e.g. ["24 projects", "9 clients"]. */
+  stats?: string[];
   email?: string;
+  /** Phone number for calls, with country code, e.g. "+44 20 7946 0000". */
+  phone?: string;
   whatsapp?: string;
   socials?: Socials;
 };
@@ -33,6 +37,8 @@ export type Category = {
   /** Tall screenshot that slowly scrolls inside the focused arc tile. */
   preview?: string;
   accent?: string;
+  /** Accent used in the light theme instead of `accent` (earthy tones that match the covers). */
+  accentLight?: string;
   order?: number;
   projectCount: number;
 };
@@ -122,7 +128,9 @@ export function getSite(): Site {
     city: text(raw.city),
     timezone: text(raw.timezone),
     about: text(raw.about),
+    stats: list(raw.stats, text),
     email: email(raw.email),
+    phone: text(raw.phone),
     whatsapp: text(raw.whatsapp),
     socials: {
       linkedin: url(socials.linkedin),
@@ -170,6 +178,7 @@ export function getCategories(): Category[] {
         cover: url(raw.cover),
         preview: url(raw.preview),
         accent: text(raw.accent),
+        accentLight: text(raw.accentLight),
         order: num(raw.order),
         projectCount: getProjects(slug).length,
       };

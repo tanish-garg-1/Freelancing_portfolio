@@ -10,8 +10,6 @@ import { isPhonePortrait } from "@/lib/visual";
 export type ArcHandle = {
   step: (direction: 1 | -1) => void;
   openFocused: () => void;
-  /** Rotate the shortest way round to a category index. */
-  focusIndex: (index: number) => void;
   /** Place a category in focus instantly (used to restore position after Back). */
   jumpTo: (index: number) => void;
   /** A small there-and-back rotation that shows the arc can move. */
@@ -31,6 +29,13 @@ type Props = {
 const MIN_SLOTS = 7;
 
 const mod = (a: number, n: number) => ((a % n) + n) % n;
+
+/** The dial ellipse sits this much further out than the tile centres, so the tiles don't hide it. */
+const DIAL_SCALE = 1.2;
+/** Ticks per arc step (one long tick per category slot, short ones between). */
+const DIAL_TICKS_PER_STEP = 4;
+/** How many steps either side of the focused tile get ticks. */
+const DIAL_SPAN = 4;
 
 /** Largest lean (degrees) of the focused tile toward the mouse. */
 const MAX_TILT = 14;
@@ -81,6 +86,7 @@ const ArcCarousel = forwardRef<ArcHandle, Props>(function ArcCarousel(
   const m = n * Math.max(1, Math.ceil(MIN_SLOTS / Math.max(n, 1)));
 
   const stageRef = useRef<HTMLDivElement>(null);
+  const dialRef = useRef<SVGSVGElement>(null);
   const tileRefs = useRef<(HTMLDivElement | null)[]>([]);
   tileRefs.current.length = m;
   // Untilted box of each tile inside the stage, so pointer maths never feeds back on the tilt.
@@ -121,6 +127,34 @@ const ArcCarousel = forwardRef<ArcHandle, Props>(function ArcCarousel(
       el.dataset.focus = closeness > 0.5 ? "1" : "0";
       if (el.dataset.focus === "0" && el.dataset.tilt === "1") resetTilt(el);
     });
+
+    // Dial: a hairline ellipse just outside the tiles, with ticks that turn with the arc like a bezel.
+    const dial = dialRef.current;
+    if (dial) {
+      const drx = g.rx * DIAL_SCALE;
+      const dry = g.ry * DIAL_SCALE;
+      dial.setAttribute("viewBox", `0 0 ${stage.clientWidth} ${stage.clientHeight}`);
+      const ring = dial.firstElementChild;
+      ring?.setAttribute("cx", String(g.cx));
+      ring?.setAttribute("cy", String(g.cy));
+      ring?.setAttribute("rx", String(drx));
+      ring?.setAttribute("ry", String(dry));
+      let d = "";
+      const first = Math.floor((position.current.value - DIAL_SPAN) * DIAL_TICKS_PER_STEP);
+      const last = Math.ceil((position.current.value + DIAL_SPAN) * DIAL_TICKS_PER_STEP);
+      for (let t = first; t <= last; t++) {
+        const angle = (g.center + (t / DIAL_TICKS_PER_STEP - position.current.value) * g.step) * rad;
+        const x = g.cx + drx * Math.cos(angle);
+        const y = g.cy + dry * Math.sin(angle);
+        // Normal of the ellipse at this point, pointing toward its centre (toward the tiles).
+        const nx = -Math.cos(angle) / drx;
+        const ny = -Math.sin(angle) / dry;
+        const len = Math.hypot(nx, ny);
+        const tick = t % DIAL_TICKS_PER_STEP === 0 ? 16 : 7;
+        d += `M${x.toFixed(1)} ${y.toFixed(1)}l${((nx / len) * tick).toFixed(1)} ${((ny / len) * tick).toFixed(1)}`;
+      }
+      dial.lastElementChild?.setAttribute("d", d);
+    }
 
     const a = g.center * rad;
     stage.style.setProperty("--glow-x", `${g.cx + g.rx * Math.cos(a)}px`);
@@ -165,16 +199,6 @@ const ArcCarousel = forwardRef<ArcHandle, Props>(function ArcCarousel(
     live.current.onOpen(slot % n, tile ?? null);
   }, [m, n]);
 
-  const focusIndex = useCallback(
-    (index: number) => {
-      if (live.current.disabled || !n) return;
-      let delta = mod(index - mod(target.current, n), n);
-      if (delta > n / 2) delta -= n;
-      if (delta !== 0) goTo(target.current + delta);
-    },
-    [goTo, n],
-  );
-
   const jumpTo = useCallback(
     (index: number) => {
       if (!n) return;
@@ -199,13 +223,7 @@ const ArcCarousel = forwardRef<ArcHandle, Props>(function ArcCarousel(
     });
   }, [layout, n]);
 
-  useImperativeHandle(ref, () => ({ step, openFocused, focusIndex, jumpTo, nudge }), [
-    step,
-    openFocused,
-    focusIndex,
-    jumpTo,
-    nudge,
-  ]);
+  useImperativeHandle(ref, () => ({ step, openFocused, jumpTo, nudge }), [step, openFocused, jumpTo, nudge]);
 
   /** The focused tile leans toward a mouse pointer, and a light sheen follows it. */
   const handleTilt = (slot: number, e: PointerEvent<HTMLDivElement>) => {
@@ -327,6 +345,10 @@ const ArcCarousel = forwardRef<ArcHandle, Props>(function ArcCarousel(
       aria-activedescendant={n ? `arc-option-${focusedIndex}` : undefined}
     >
       <div className="arc-glow" aria-hidden="true" />
+      <svg ref={dialRef} className="arc-dial" aria-hidden="true">
+        <ellipse />
+        <path />
+      </svg>
       {Array.from({ length: m }, (_, slot) => {
         const category = categories[slot % n];
         const primary = slot < n; // repeats exist only to fill the ring; hide them from screen readers
@@ -346,7 +368,10 @@ const ArcCarousel = forwardRef<ArcHandle, Props>(function ArcCarousel(
             onPointerLeave={() => handleTiltEnd(slot)}
           >
             <Media src={category.cover} title={category.title} accent={category.accent} />
-            <LivingPreview src={category.preview} accent={category.accent} />
+            {/* A real cover beats the sketched stand-in page, so the living tile only runs with a preview or no cover. */}
+            {(category.preview || !category.cover) && (
+              <LivingPreview src={category.preview} accent={category.accent} accentLight={category.accentLight} />
+            )}
             <span className="arc-tile-sheen" aria-hidden="true" />
             <span className="arc-tile-label">{category.title}</span>
           </div>

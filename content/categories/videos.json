@@ -3,5 +3,6 @@
   "title": "Videos",
   "oneLiner": "Promos, reels, and product videos that get watched.",
   "accent": "#d946ef",
+  "accentLight": "#7a2e2e",
   "order": 3
 }

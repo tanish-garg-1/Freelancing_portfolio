@@ -1,0 +1,13 @@
+{
+  "title": "Sample business website",
+  "summary": "Placeholder project showing every optional field. Replace the text, or delete fields you don't need.",
+  "tags": ["Business", "Next.js"],
+  "thumbnail": "",
+  "gallery": [],
+  "liveUrl": "https://example.com",
+  "videoUrl": "",
+  "problem": "Placeholder: what the client was struggling with before the project.",
+  "solution": "Placeholder: what you built and the key decisions behind it.\n\nA blank line starts a new paragraph.",
+  "results": "Placeholder: the outcome, ideally with a number, like 2x more enquiries in the first month.",
+  "order": 1
+}

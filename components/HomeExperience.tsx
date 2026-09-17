@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import gsap from "gsap";
 import ArcCarousel, { type ArcHandle } from "./ArcCarousel";
@@ -9,7 +9,7 @@ import SocialDock from "./SocialDock";
 import StaticHero from "./StaticHero";
 import type { Category, Site } from "@/lib/content";
 import { useReducedMotion } from "@/lib/useReducedMotion";
-import { EXPAND_OVERLAY_ID, accentOf, bannerHeightPx, placeholderBackground } from "@/lib/visual";
+import { EXPAND_OVERLAY_ID, accentStyle, bannerHeightPx, placeholderBackground } from "@/lib/visual";
 
 type Props = { site: Site; categories: Category[] };
 
@@ -154,7 +154,7 @@ export default function HomeExperience({ site, categories }: Props) {
       ref={rootRef}
       className="home"
       data-accent-scope=""
-      style={{ "--accent": accentOf(current?.accent) } as CSSProperties}
+      style={accentStyle(current?.accent, current?.accentLight)}
     >
       {/* The arc comes first in tab order: it is the page's primary interaction. */}
       {categories.length > 0 && (
@@ -180,7 +180,6 @@ export default function HomeExperience({ site, categories }: Props) {
               categories={categories}
               index={index}
               onOpen={() => arcRef.current?.openFocused()}
-              onJump={(i) => arcRef.current?.focusIndex(i)}
               touchHint={touchHint}
             />
           </div>
@@ -192,6 +191,8 @@ export default function HomeExperience({ site, categories }: Props) {
 
         <div className="home-dock" data-fade>
           <SocialDock site={site} />
+          {/* Proof line hidden for now; uncomment to show site.stats again.
+          {site.stats && <p className="home-proof meta tabular">{site.stats.join("  ·  ")}</p>} */}
         </div>
       </div>
     </div>

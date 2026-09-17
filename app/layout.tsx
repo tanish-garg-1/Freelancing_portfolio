@@ -24,7 +24,7 @@ const serif = Instrument_Serif({ subsets: ["latin"], weight: "400", style: "ital
 const BOOT_SCRIPT = `try{var d=document.documentElement,t=localStorage.getItem("theme");if(t==="light"||t==="dark")d.setAttribute("data-theme",t);if(sessionStorage.getItem("intro-seen")==="1")d.classList.add("intro-seen")}catch(e){}`;
 
 /** Browser chrome (mobile address bar) matches the default light background. */
-export const viewport: Viewport = { themeColor: "#f5f4f1", colorScheme: "light dark" };
+export const viewport: Viewport = { themeColor: "#efeae3", colorScheme: "light dark" };
 
 export function generateMetadata(): Metadata {
   const site = getSite();

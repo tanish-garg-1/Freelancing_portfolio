@@ -20,8 +20,8 @@ All content lives in `content/` as JSON. **Every field is optional**, so leave a
 
 | File | What it controls |
 | --- | --- |
-| `content/site.json` | `name`, `role`, `intro`, `about` (the About page only exists when this is set), `email`, `whatsapp`, and `socials` (`linkedin`, `instagram`, `github`, `x`). The "Hire me" button uses the email first, then WhatsApp. |
-| `content/categories/<slug>.json` | One tile on the arc: `title`, `oneLiner`, `cover` (image), `accent` (hex like `#8b5cf6`), `order`. |
+| `content/site.json` | `name`, `role`, `intro`, `stats` (short proof points in one line on the home page, e.g. `["24 projects", "9 clients"]`), `about` (the About page only exists when this is set), `email`, `phone` (with country code; shows a call icon), `whatsapp`, and `socials` (`linkedin`, `instagram`, `github`, `x`). The "Hire me" button uses the email first, then WhatsApp. |
+| `content/categories/<slug>.json` | One tile on the arc: `title`, `oneLiner`, `cover` (image), `accent` (hex like `#8b5cf6`, tints image placeholders; the dark theme uses one brass accent everywhere), `accentLight` (hex, the category colour in the light theme; falls back to clay), `order`. |
 | `content/projects/<category-slug>/<slug>.json` | One project: `title`, `summary`, `tags` (these become filter tabs), `thumbnail`, `gallery` (list of images), `liveUrl`, `videoUrl` (`.mp4`/`.webm` plays inline, anything else becomes a "Watch video" button), `problem`, `solution`, `results`, `order`. |
 
 - **Adding a category:** add a JSON file to `content/categories/`. It shows up on the arc automatically.

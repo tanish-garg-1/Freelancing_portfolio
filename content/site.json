@@ -3,14 +3,16 @@
   "role": "Freelance developer",
   "intro": "I build websites, CRM dashboards, videos, and AI chatbots that help small businesses grow.",
   "availability": "Available for new projects",
-  "city": "Your City",
-  "timezone": "UTC",
+  "city": "Gurgaon",
+  "timezone": "Asia/Kolkata",
+  "stats": ["24 projects", "9 clients", "4.9 stars"],
   "about": "Placeholder about text. Write a few lines about yourself here, or delete this line to hide the About page.",
   "email": "hello@example.com",
-  "whatsapp": "",
+  "phone": "+00 00000 00000",
+  "whatsapp": "+00 00000 00000",
   "socials": {
     "linkedin": "",
-    "instagram": "",
+    "instagram": "https://www.instagram.com/",
     "github": "",
     "x": ""
   }

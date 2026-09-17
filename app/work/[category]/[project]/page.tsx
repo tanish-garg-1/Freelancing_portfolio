@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
-import type { CSSProperties } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Media from "@/components/Media";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "@/components/Icon";
 import { getCategories, getCategory, getProject, getProjects, getSite } from "@/lib/content";
 import { contactHref } from "@/lib/links";
-import { accentOf, isVideoFile } from "@/lib/visual";
+import { accentStyle, isVideoFile } from "@/lib/visual";
 
 type Params = Promise<{ category: string; project: string }>;
 
@@ -54,7 +53,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
   const hire = contactHref(getSite());
 
   return (
-    <main className="case" data-accent-scope="" style={{ "--accent": accentOf(category.accent) } as CSSProperties}>
+    <main className="case" data-accent-scope="" style={accentStyle(category.accent, category.accentLight)}>
       <div className="container">
         <Link href={`/work/${category.slug}`} className="back">
           <ArrowLeft />

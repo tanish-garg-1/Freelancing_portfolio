@@ -1,62 +1,76 @@
 /* ============================================================
    Theme tokens. Light is the default (set on <html> in layout.tsx); dark is the
-   alternate palette via the toggle. Neither is an inversion of the other. Every pair below was contrast-checked:
-   dark  text 18.4:1 · muted 7.6:1 · faint 6.0:1
-   light text 16.5:1 · muted 7.6:1 · faint 5.0:1 · button text 7.0:1
+   alternate palette via the toggle. Neither is an inversion of the other.
+   Both are warm so they sit with the travertine photo covers:
+   dark  = espresso charcoal, brass accent, pale window light, film grain (D1 + D2 + D3)
+   light = travertine paper, earthy accents, soft window shadow (L1 + L2 + D2)
+   Contrast on --bg: dark text 17:1 · muted 6.6:1 · faint 5.1:1; light text 15:1 · muted 6.0:1 · faint 4.6:1
    ============================================================ */
 :root,
 [data-theme="dark"] {
   color-scheme: dark;
-  --bg: #0b0b0c;
-  --surface: #141415;
-  --line: rgba(255, 255, 255, 0.1);
-  --line-strong: rgba(255, 255, 255, 0.2);
-  --text: #f4f4f2;
-  --body-text: #d4d4d0;
-  --muted: #9a9a96;
-  --faint: #878680;
-  --marker: #a78bfa;
+  --bg: #13110f;
+  --surface: #1c1a17;
+  --line: rgba(255, 240, 225, 0.1);
+  --line-strong: rgba(255, 240, 225, 0.2);
+  --text: #f3efe9;
+  --body-text: #d6d0c8;
+  --muted: #a09a92;
+  --faint: #8c867e;
+  --marker: #c9a27a;
+  /* Champagne brass: the dark theme's one accent, replacing the categories' violets. */
+  --accent-dark: #c9a27a;
   --on-accent: #ffffff;
-  --chip-bg: rgba(255, 255, 255, 0.04);
-  --ph-1: #1c1c1f;
-  --ph-2: #0d0d0e;
+  --chip-bg: rgba(255, 240, 225, 0.04);
+  --ph-1: #221f1b;
+  --ph-2: #14120f;
   --ph-strong: 80%;
   --ph-soft: 35%;
   --glow-mix: 50%;
   --shadow: rgba(0, 0, 0, 0.45);
-  --label-scrim: rgba(0, 0, 0, 0.72);
+  --label-scrim: rgba(12, 10, 8, 0.72);
   --label-text: #ffffff;
-  --banner-scrim-top: rgba(11, 11, 12, 0.3);
-  --banner-scrim-mid: rgba(11, 11, 12, 0.05);
-  --home-sheen: rgba(255, 255, 255, 0.03);
-  --media-bg: #000000;
+  --banner-scrim-top: rgba(19, 17, 15, 0.3);
+  --banner-scrim-mid: rgba(19, 17, 15, 0.05);
+  --home-sheen: rgba(255, 240, 225, 0.03);
+  --media-bg: #0b0a09;
+  /* Window pattern on the home stage: pale light panes on a dark wall. */
+  --window-frame: transparent;
+  --window-pane: rgba(255, 232, 200, 0.05);
+  /* Film grain, painted under the content as part of the background. */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.07 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 [data-theme="light"] {
   color-scheme: light;
-  --bg: #f5f4f1;
-  --surface: #ffffff;
-  --line: rgba(22, 22, 22, 0.12);
-  --line-strong: rgba(22, 22, 22, 0.26);
-  --text: #161616;
-  --body-text: #2b2a28;
-  --muted: #55534e;
-  --faint: #6a6862;
-  --marker: #6d28d9;
+  --bg: #efeae3;
+  --surface: #f8f5f0;
+  --line: rgba(74, 56, 40, 0.14);
+  --line-strong: rgba(74, 56, 40, 0.3);
+  --text: #1d1915;
+  --body-text: #332c26;
+  --muted: #5e554c;
+  --faint: #6f665c;
+  --marker: #9a5b3c;
   --on-accent: #ffffff;
-  --chip-bg: rgba(255, 255, 255, 0.72);
-  --ph-1: #ffffff;
-  --ph-2: #e8e6e1;
+  --chip-bg: rgba(255, 252, 247, 0.7);
+  --accent-light: #9a5b3c; /* clay: the light theme's default accent (L2) */
+  --ph-1: #f8f5f0;
+  --ph-2: #e4ddd3;
   --ph-strong: 55%;
   --ph-soft: 28%;
   --glow-mix: 32%;
-  --shadow: rgba(40, 36, 30, 0.14);
-  --label-scrim: rgba(255, 255, 255, 0.88);
-  --label-text: #161616;
-  --banner-scrim-top: rgba(245, 244, 241, 0.35);
-  --banner-scrim-mid: rgba(245, 244, 241, 0.08);
-  --home-sheen: rgba(0, 0, 0, 0.025);
-  --media-bg: #161616;
+  --shadow: rgba(74, 56, 40, 0.16);
+  --label-scrim: rgba(248, 245, 240, 0.88);
+  --label-text: #1d1915;
+  --banner-scrim-top: rgba(239, 234, 227, 0.35);
+  --banner-scrim-mid: rgba(239, 234, 227, 0.08);
+  --home-sheen: rgba(74, 56, 40, 0.03);
+  --media-bg: #1d1915;
+  /* Window pattern on the home stage: a soft sunlit window with its frame in shadow. */
+  --window-frame: rgba(92, 66, 40, 0.07);
+  --window-pane: rgba(255, 250, 242, 0.55);
+  --grain: none;
 }
 
 :root {
@@ -75,18 +89,24 @@
   --edge: max(var(--gutter), calc((100% - var(--frame)) / 2 + var(--gutter)));
 }
 
-/* Accent-derived tokens are re-declared wherever --accent is overridden (per category). */
+/*
+ * Accent-derived tokens are re-declared wherever --accent is overridden (per category).
+ * --accent-now is the accent for the current theme: brass in dark, --accent-light in light.
+ * --accent itself still colours image placeholders.
+ */
 :root,
 [data-accent-scope] {
-  --accent-ink: color-mix(in srgb, var(--accent) 70%, #ffffff);
-  --accent-solid: color-mix(in srgb, var(--accent) 78%, #000000);
-  --glow-color: color-mix(in srgb, var(--accent) var(--glow-mix), transparent);
+  --accent-now: var(--accent-dark);
+  --accent-ink: color-mix(in srgb, var(--accent-now) 70%, #ffffff);
+  --accent-solid: color-mix(in srgb, var(--accent-now) 78%, #000000);
+  --glow-color: color-mix(in srgb, var(--accent-now) var(--glow-mix), transparent);
 }
 
 [data-theme="light"],
 [data-theme="light"] [data-accent-scope] {
-  --accent-ink: color-mix(in srgb, var(--accent) 60%, #000000);
-  --accent-solid: color-mix(in srgb, var(--accent) 70%, #000000);
+  --accent-now: var(--accent-light, var(--accent));
+  --accent-ink: color-mix(in srgb, var(--accent-now) 60%, #000000);
+  --accent-solid: color-mix(in srgb, var(--accent-now) 70%, #000000);
 }
 
 /* ---------- base + browser surfaces ---------- */
@@ -97,7 +117,7 @@
 html,
 body {
   margin: 0;
-  background: var(--bg);
+  background: var(--grain), var(--bg);
   color: var(--text);
   font-family: var(--font-body), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -110,7 +130,7 @@ html {
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--accent) 38%, transparent);
+  background: color-mix(in srgb, var(--accent-now) 38%, transparent);
   color: var(--text);
 }
 
@@ -221,6 +241,11 @@ a {
 }
 .pill:active {
   transform: scale(var(--press));
+}
+/* L2: in the light theme the primary pill takes the earthy accent instead of plain ink. */
+[data-theme="light"] .pill:not(.pill-ghost) {
+  background: var(--accent-solid);
+  color: var(--on-accent);
 }
 .pill-ghost {
   border-color: var(--line-strong);
@@ -444,7 +469,31 @@ kbd .icon {
   inset: 0;
   overflow: hidden;
   touch-action: none;
-  background: radial-gradient(60% 50% at 0% 0%, var(--home-sheen), transparent 60%), var(--bg);
+  background: var(--grain), radial-gradient(60% 50% at 0% 0%, var(--home-sheen), transparent 60%), var(--bg);
+}
+
+/*
+ * D2: a large four-pane window of light falling diagonally across the right half of the stage, onto
+ * the arc, blurred so it reads as light on a wall rather than a shape. Light theme: sunlit panes inside a shaded frame. Dark theme:
+ * only faint pale panes. It sits under the copy and the arc.
+ */
+.home::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 4vh;
+  left: 50vw;
+  width: 64vmax;
+  height: 64vmax;
+  pointer-events: none;
+  background:
+    linear-gradient(var(--window-pane), var(--window-pane)) 0 0 / 47% 47% no-repeat,
+    linear-gradient(var(--window-pane), var(--window-pane)) 100% 0 / 47% 47% no-repeat,
+    linear-gradient(var(--window-pane), var(--window-pane)) 0 100% / 47% 47% no-repeat,
+    linear-gradient(var(--window-pane), var(--window-pane)) 100% 100% / 47% 47% no-repeat,
+    var(--window-frame);
+  transform: rotate(24deg) skewX(-12deg);
+  filter: blur(18px);
 }
 
 /* Hero, focus info and dock stack in normal flow, so long content pushes instead of overlapping. */
@@ -496,6 +545,22 @@ kbd .icon {
   color: var(--muted);
 }
 /* The one serif-italic moment: the role, slightly larger so it matches the sans x-height. */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 24px;
+}
+/* The contact button keeps the site's own clay (like "Hire me"), not the focused category's colour. */
+[data-theme="light"] .pill.hero-cta {
+  background: color-mix(in srgb, var(--marker) 70%, #000000);
+}
+.hero-cta .icon {
+  transition: transform 0.2s var(--ease-out);
+}
+.hero-cta:hover .icon {
+  transform: translateX(3px);
+}
 .hero-role {
   font-family: var(--font-serif), Georgia, serif;
   font-style: italic;
@@ -541,8 +606,9 @@ kbd {
   background: var(--marker);
 }
 
+/* E5: half the name's scale, so "Your Name" stays the single hero headline. */
 .focus-title {
-  font-size: clamp(40px, 5vw, 76px);
+  font-size: clamp(26px, 2.6vw, 40px);
 }
 .focus-line {
   max-width: 40ch;
@@ -581,6 +647,7 @@ kbd {
 .focus-open:hover {
   border-color: var(--text);
 }
+
 .focus-open:active {
   transform: scale(var(--press));
 }
@@ -591,35 +658,13 @@ kbd {
   transform: translateX(3px);
 }
 
-.arc-dots {
-  display: flex;
-  gap: 2px;
+/* 8: position as a mono counter, e.g. 02 / 03 (the dial's ticks already show where the arc is). */
+.arc-count {
+  margin: 0;
+  color: var(--faint);
 }
-.arc-dot {
-  width: 24px;
-  height: 24px;
-  display: grid;
-  place-items: center;
-  padding: 0;
-  border: 0;
-  border-radius: 999px;
-  background: none;
-  cursor: pointer;
-}
-.arc-dot::after {
-  content: "";
-  width: 7px;
-  height: 7px;
-  border-radius: 999px;
-  background: var(--line-strong);
-  transition: transform 0.25s var(--ease-out), background-color 0.25s;
-}
-.arc-dot:hover::after {
-  background: var(--muted);
-}
-.arc-dot[aria-current="true"]::after {
-  transform: scaleX(2.4); /* transform, not width: no layout work per frame */
-  background: var(--marker);
+.arc-count-now {
+  color: var(--text);
 }
 
 .focus-hint {
@@ -641,7 +686,17 @@ kbd {
 }
 
 .home-dock {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 22px;
   margin-top: auto;
+}
+/* E4: one quiet mono line of proof points in the bottom-left. */
+.home-proof {
+  margin: 0;
+  color: var(--muted);
+  white-space: pre;
 }
 .home-empty {
   color: var(--muted);
@@ -658,6 +713,26 @@ kbd {
 .arc-stage:focus-visible .arc-tile[data-focus="1"] {
   outline: 2px solid var(--text);
   outline-offset: 4px;
+}
+/* E1: hairline bezel along the arc; its ticks turn with the tiles. */
+.arc-dial {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.arc-dial ellipse,
+.arc-dial path {
+  fill: none;
+  stroke: var(--line-strong);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.arc-dial path {
+  stroke: var(--faint);
+  stroke-linecap: round;
 }
 .arc-glow {
   position: absolute;
@@ -733,9 +808,22 @@ kbd {
   width: 100%;
   height: 100%;
 }
+/* E6: the focused cover drifts slowly in and back, so the tile still feels alive without the sketch. */
+.arc-tile[data-focus="1"] img.media {
+  animation: cover-drift 14s ease-in-out infinite alternate;
+}
+@keyframes cover-drift {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
 
 /* ---------- living tile: a page slowly scrolls inside the focused tile ---------- */
 .living {
+  --tile-now: var(--tile-accent);
   position: absolute;
   inset: 0;
   overflow: hidden;
@@ -791,6 +879,10 @@ kbd {
   }
 }
 
+[data-theme="light"] .living {
+  --tile-now: var(--tile-accent-light, var(--tile-accent));
+}
+
 /* The sketched stand-in page: 3.2 tiles tall, built from simple blocks in the category colour. */
 .living-track {
   display: flex;
@@ -815,13 +907,13 @@ kbd {
   width: 9%;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: var(--tile-accent);
+  background: var(--tile-now);
 }
 .lp-pill {
   width: 22%;
   height: 7px;
   border-radius: 999px;
-  background: var(--tile-accent);
+  background: var(--tile-now);
 }
 .lp-line {
   height: 4px;
@@ -842,18 +934,18 @@ kbd {
   height: 9px;
   margin-top: 3px;
   border-radius: 999px;
-  background: var(--tile-accent);
+  background: var(--tile-now);
 }
 .lp-image {
   height: 13%;
   border-radius: 6px;
   background:
-    radial-gradient(circle at 25% 30%, color-mix(in srgb, var(--tile-accent) 85%, transparent), transparent 60%),
-    color-mix(in srgb, var(--tile-accent) 25%, var(--surface));
+    radial-gradient(circle at 25% 30%, color-mix(in srgb, var(--tile-now) 85%, transparent), transparent 60%),
+    color-mix(in srgb, var(--tile-now) 25%, var(--surface));
 }
 .lp-image-alt {
   background:
-    radial-gradient(circle at 75% 70%, color-mix(in srgb, var(--tile-accent) 75%, transparent), transparent 60%),
+    radial-gradient(circle at 75% 70%, color-mix(in srgb, var(--tile-now) 75%, transparent), transparent 60%),
     color-mix(in srgb, var(--text) 10%, var(--surface));
 }
 .lp-cards {
@@ -865,7 +957,7 @@ kbd {
 .lp-cards i {
   border-radius: 4px;
   background: color-mix(in srgb, var(--text) 12%, var(--surface));
-  border: 1px solid color-mix(in srgb, var(--tile-accent) 35%, transparent);
+  border: 1px solid color-mix(in srgb, var(--tile-now) 35%, transparent);
 }
 .lp-w20 { width: 20%; }
 .lp-w30 { width: 30%; }
@@ -891,7 +983,7 @@ kbd {
   width: 100%;
   height: 30%;
   border-radius: 2px;
-  background: var(--tile-accent);
+  background: var(--tile-now);
   --living-travel: 233%;
 }
 .arc-tile-label {
@@ -1324,9 +1416,13 @@ html.lenis body {
   .home-hero {
     order: 0;
   }
+  /* "Start a project" and "Hire me" already cover contact on phones, so the dock and proof line
+     give their space back to the arc. */
   .home-dock {
-    order: 1;
-    margin-top: 0;
+    display: none;
+  }
+  .hero-actions {
+    margin-top: 16px;
   }
   .home-focus {
     order: 2;
@@ -1339,7 +1435,7 @@ html.lenis body {
     font-size: 14px;
   }
   .focus-title {
-    font-size: 40px;
+    font-size: 26px;
   }
   .focus-line {
     display: -webkit-box;
@@ -1398,7 +1494,7 @@ html.lenis body {
     font-size: 13px;
   }
   .focus-title {
-    font-size: clamp(28px, 8vh, 40px);
+    font-size: clamp(22px, 6vh, 28px);
   }
   .focus-line,
   .focus-hint {
@@ -1416,4 +1512,42 @@ html.lenis body {
   .focus-hint-touch {
     display: flex;
   }
+}
+
+/* ============================================================
+   TRIAL: dark-theme text colours (T2 + T1 + T6 + T8). Delete this whole block to undo.
+   Contrast on #13110f: ivory 15.6:1 · sand 8.5:1 · stone 5.7:1 · brass 8:1 · brass labels 5.2:1
+   ============================================================ */
+/* T2: warmer text, candlelit ivory and sand instead of screen-white and grey. */
+[data-theme="dark"] {
+  --text: #efe6d8;
+  --body-text: #d9cfc0;
+  --muted: #b3a896;
+  --faint: #978c7c;
+}
+/* T1: the serif-italic role is the one brass word. */
+[data-theme="dark"] .hero-role {
+  color: var(--marker);
+}
+/* T6: the small mono info layer (availability, city, time, counter) turns softly brass. */
+[data-theme="dark"] .hero-meta,
+[data-theme="dark"] .arc-count {
+  color: color-mix(in srgb, var(--marker) 75%, var(--bg));
+}
+[data-theme="dark"] .arc-count-now {
+  color: var(--marker);
+}
+/* T8: hovering rewards with brass instead of white. */
+[data-theme="dark"] .nav-links a:not(.pill):hover,
+[data-theme="dark"] .dock a:hover,
+[data-theme="dark"] .back:hover,
+[data-theme="dark"] .text-link:hover {
+  color: var(--marker);
+}
+[data-theme="dark"] .dock a:hover,
+[data-theme="dark"] .focus-open:hover {
+  border-color: color-mix(in srgb, var(--marker) 60%, transparent);
+}
+[data-theme="dark"] .focus-open:hover .icon {
+  color: var(--marker);
 }
