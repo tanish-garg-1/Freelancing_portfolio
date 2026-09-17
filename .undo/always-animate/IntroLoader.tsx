@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { prefersReducedMotion } from "@/lib/useReducedMotion";
 
 /** Session-scoped: the intro plays once per visit, not on every page. */
 export const INTRO_KEY = "intro-seen";
@@ -14,8 +13,8 @@ const MAX_MS = 2400;
  * Typographic preloader: the name in serif italic in the middle and a big mono % counter in the
  * corner. The counter follows real milestones (fonts ready, window load) instead of a fake timer,
  * then the curtain retracts upward. It is server-rendered so the page never flashes before it; the
- * beforeInteractive script in the layout hides it for repeat visits, and CSS hides it when
- * JavaScript is off.
+ * beforeInteractive script in the layout hides it for repeat visits, and CSS hides it for
+ * reduced-motion users and when JavaScript is off.
  */
 export default function IntroLoader({ label }: { label?: string }) {
   const rootRef = useRef<HTMLDivElement>(null);
@@ -31,7 +30,7 @@ export default function IntroLoader({ label }: { label?: string }) {
     } catch {
       // storage blocked: still play once for this page load
     }
-    if (seen || prefersReducedMotion()) {
+    if (seen || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setDone(true);
       return;
     }
@@ -52,8 +51,7 @@ export default function IntroLoader({ label }: { label?: string }) {
     const cap = window.setTimeout(() => reach(100), MAX_MS);
 
     const tick = (now: number) => {
-      // rAF timestamps can be slightly earlier than `start`, so never let the count go below 0.
-      const goal = Math.min(target, Math.max(0, (100 * (now - start)) / MIN_MS));
+      const goal = Math.min(target, (100 * (now - start)) / MIN_MS);
       shown += (goal - shown) * 0.14;
       if (goal - shown < 0.4) shown = goal;
       if (countRef.current) countRef.current.textContent = String(Math.round(shown)).padStart(2, "0");

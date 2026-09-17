@@ -62,8 +62,6 @@
 :root {
   --accent: #8b5cf6;
   --radius: 16px;
-  /* Border width of the arc tiles that are not in focus (drawn in --line-strong); the focused tile keeps a 1px accent border. */
-  --tile-border: 2px;
   /* Motion tokens: strong ease-out for UI, ease-in-out for things moving across the screen. */
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
@@ -677,7 +675,7 @@ kbd {
   top: 0;
   opacity: 0; /* set by the layout pass once positions are known */
   overflow: hidden;
-  border: var(--tile-border) solid var(--line-strong);
+  border: 1px solid var(--line);
   border-radius: 18px;
   background: var(--surface);
   box-shadow: 0 10px 40px var(--shadow);
@@ -688,13 +686,11 @@ kbd {
   will-change: transform;
   transition:
     border-color 0.3s,
-    border-width 0.3s,
     box-shadow 0.3s,
     --tilt-x 0.4s var(--ease-out),
     --tilt-y 0.4s var(--ease-out);
 }
 .arc-tile[data-focus="1"] {
-  border-width: 1px;
   border-color: var(--accent-ink);
   box-shadow: 0 24px 50px -18px var(--shadow);
 }
@@ -893,6 +889,13 @@ kbd {
   border-radius: 2px;
   background: var(--tile-accent);
   --living-travel: 233%;
+}
+@media (prefers-reduced-motion: reduce) {
+  .living-track,
+  .living-shot,
+  .living-thumb {
+    animation: none;
+  }
 }
 .arc-tile-label {
   position: absolute;
@@ -1415,5 +1418,17 @@ html.lenis body {
   }
   .focus-hint-touch {
     display: flex;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-loader {
+    display: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }

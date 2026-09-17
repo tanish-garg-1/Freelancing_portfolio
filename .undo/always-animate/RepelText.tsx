@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { prefersReducedMotion } from "@/lib/useReducedMotion";
 
 type Axes = { wdth: number; wght: number };
 
@@ -21,7 +20,7 @@ const smoothstep = (t: number) => t * t * (3 - 2 * t);
  * Heading whose letters swell wide and heavy under the mouse pointer while the
  * rest collapse into thin strokes, so neighbours get shoved away horizontally.
  * Uses the width + weight axes of a variable font. Screen readers get the plain
- * text; touch devices get the resting heading.
+ * text; touch devices and reduced-motion users get the resting heading.
  */
 export default function RepelText({ text, className }: { text: string; className?: string }) {
   const ref = useRef<HTMLHeadingElement>(null);
@@ -30,7 +29,8 @@ export default function RepelText({ text, className }: { text: string; className
     const root = ref.current;
     if (!root) return;
     const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    if (!canHover || prefersReducedMotion()) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!canHover || reduced) return;
 
     const letters = Array.from(root.querySelectorAll<HTMLElement>("[data-letter]"));
     const state = letters.map(() => ({ ...REST, opacity: 1 }));

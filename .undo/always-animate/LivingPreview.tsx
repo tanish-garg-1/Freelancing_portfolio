@@ -10,7 +10,7 @@ type Props = {
 /**
  * "Living tile": a page that slowly scrolls inside the focused arc tile, as if someone is browsing
  * the project. Purely decorative, so it is hidden from screen readers. CSS only runs the scroll
- * while the tile is focused.
+ * while the tile is focused, and not at all for reduced-motion users.
  */
 export default function LivingPreview({ src, accent }: Props) {
   return (

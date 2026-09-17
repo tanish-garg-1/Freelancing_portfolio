@@ -26,8 +26,7 @@ The share zip leaves out the heavy, machine-specific folders (`node_modules/`, `
     (`components/SmoothScroll.tsx`), a once-per-session `%` intro loader (`components/IntroLoader.tsx`).
 - **Motion kept from earlier:** hero name letters swell under the cursor (`RepelText.tsx`, Roboto Flex variable font), the living tile (a page scrolls
   inside the focused tile), 3D tilt + sheen on the focused tile, the "YN" logo unfolding into the full name. No glows (removed on purpose).
-- **Accessibility:** a skip-to-content link, focus-visible rings, `theme-color` meta. Motion plays for everyone, even with the OS
-  "reduce motion" / Windows "Animation effects" off (switch: `RESPECT_REDUCED_MOTION` in `lib/useReducedMotion.ts`; backup `.undo/always-animate`).
+- **Accessibility:** reduced-motion respected everywhere, a skip-to-content link, focus-visible rings, `theme-color` meta.
 
 ## 3. Fill these in (placeholders)
 `content/site.json`: `name`, `role`, `intro`, `about`, `email`, socials, **`city: "Your City"`**, **`timezone: "UTC"`** (use an IANA zone such as
@@ -45,7 +44,7 @@ The share zip leaves out the heavy, machine-specific folders (`node_modules/`, `
 
 ## 5. Undo backups
 `.undo/<feature>/` holds the files as they were before each change: `living-tile`, `tile-tilt`, `logo-expand`, `remove-glow`,
-`redesign-1-3-5` (with after-screenshots), `light-default`, `always-animate`. Copy a folder's files back over the project to undo that step.
+`redesign-1-3-5` (with after-screenshots), `light-default`. Copy a folder's files back over the project to undo that step.
 
 ## 6. The "brain" (research that drives the design decisions)
 If the bundle includes a `brain/` folder next to this project, it holds:
