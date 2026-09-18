@@ -23,8 +23,6 @@ export type Site = {
   /** Short proof points shown in one mono line on the home page, e.g. ["24 projects", "9 clients"]. */
   stats?: string[];
   email?: string;
-  /** Inbox for job applications; the nav's "Careers" button only shows when this is set. */
-  careersEmail?: string;
   /** Phone number for calls, with country code, e.g. "+44 20 7946 0000". */
   phone?: string;
   whatsapp?: string;
@@ -145,7 +143,6 @@ export function getSite(): Site {
     about: text(raw.about),
     stats: list(raw.stats, text),
     email: email(raw.email),
-    careersEmail: email(raw.careersEmail),
     phone: text(raw.phone),
     whatsapp: text(raw.whatsapp),
     socials: {

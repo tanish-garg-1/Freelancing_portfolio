@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
 import type { Site } from "@/lib/content";
-import { careersHref } from "@/lib/links";
+import { contactHref } from "@/lib/links";
 import ThemeToggle from "./ThemeToggle";
 
 /**
@@ -38,7 +38,7 @@ function LogoMark({ name }: { name: string }) {
 }
 
 export default function SiteNav({ site }: { site: Site }) {
-  const careers = careersHref(site);
+  const hire = contactHref(site);
   return (
     <header className="site-nav">
       <Link href="/" className="nav-logo" aria-label={site.name ? `${site.name}, home` : "Home"}>
@@ -50,9 +50,9 @@ export default function SiteNav({ site }: { site: Site }) {
         <Link href="/">Work</Link>
         {site.about && <Link href="/about">About</Link>}
         <ThemeToggle />
-        {careers && (
-          <a href={careers} className="pill">
-            Careers
+        {hire && (
+          <a href={hire} className="pill">
+            Hire me
           </a>
         )}
       </nav>
