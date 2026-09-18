@@ -41,8 +41,6 @@ export type Category = {
   accentLight?: string;
   order?: number;
   projectCount: number;
-  /** The projects' thumbnails, scrolling as a feed inside the focused arc tile. */
-  shots?: string[];
 };
 
 /** A client brand (or "Demo"): projects that name it are grouped into one folder on the category page. */
@@ -180,12 +178,6 @@ export function getProjects(category: string): Project[] {
     .sort(byOrder);
 }
 
-/** What a category's projects add to its arc tile: the count, and their thumbnails for the scrolling feed. */
-function showcase(projects: Project[]) {
-  const shots = projects.flatMap((p) => (p.thumbnail ? [p.thumbnail] : []));
-  return { projectCount: projects.length, shots: shots.length ? shots : undefined };
-}
-
 export function getCategories(): Category[] {
   const dir = path.join(CONTENT_DIR, "categories");
   return slugsIn(dir)
@@ -200,7 +192,7 @@ export function getCategories(): Category[] {
         accent: text(raw.accent),
         accentLight: text(raw.accentLight),
         order: num(raw.order),
-        ...showcase(getProjects(slug)),
+        projectCount: getProjects(slug).length,
       };
     })
     .sort(byOrder);

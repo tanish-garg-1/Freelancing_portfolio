@@ -4,22 +4,16 @@ import { accentOf } from "@/lib/visual";
 type Props = {
   /** Tall screenshot of real work. Without one, a sketched page in the category colour stands in. */
   src?: string;
-  /** Thumbnails of the category's projects: they scroll past as a two-column feed. */
-  shots?: string[];
   accent?: string;
   accentLight?: string;
 };
 
-/** Seconds for one full pass of the feed, per thumbnail, so longer lists don't scroll faster. */
-const FEED_SECONDS_PER_SHOT = 4;
-
 /**
- * "Living tile": real work moving inside the focused arc tile. A screenshot scrolls as if someone is
- * browsing it; project thumbnails drift past in two columns (left up, right down) like a feed; with
- * neither, a sketched page in the category colour scrolls. Purely decorative, so it is hidden from
- * screen readers. CSS only runs the motion while the tile is focused.
+ * "Living tile": a page that slowly scrolls inside the focused arc tile, as if someone is browsing
+ * the project. Purely decorative, so it is hidden from screen readers. CSS only runs the scroll
+ * while the tile is focused.
  */
-export default function LivingPreview({ src, shots, accent, accentLight }: Props) {
+export default function LivingPreview({ src, accent, accentLight }: Props) {
   return (
     <div
       className="living"
@@ -33,20 +27,6 @@ export default function LivingPreview({ src, shots, accent, accentLight }: Props
     >
       {src ? (
         <img className="living-shot" src={src} alt="" loading="lazy" draggable={false} />
-      ) : shots ? (
-        <div
-          className="living-feed"
-          style={{ "--feed-time": `${Math.max(12, shots.length * FEED_SECONDS_PER_SHOT)}s` } as CSSProperties}
-        >
-          {/* Each column holds its list twice, so sliding by exactly half loops without a seam. */}
-          {[shots, [...shots].reverse()].map((column, c) => (
-            <div key={c} className="living-feed-col">
-              {[...column, ...column].map((shot, i) => (
-                <img key={i} className="living-feed-shot" src={shot} alt="" loading="lazy" draggable={false} />
-              ))}
-            </div>
-          ))}
-        </div>
       ) : (
         <div className="living-track">
           <div className="lp-nav">
@@ -77,12 +57,9 @@ export default function LivingPreview({ src, shots, accent, accentLight }: Props
           </div>
         </div>
       )}
-      {/* The scroll-position rail belongs to a page scrolling up and down, not to an endless feed. */}
-      {!shots || src ? (
-        <i className="living-rail">
-          <i className="living-thumb" />
-        </i>
-      ) : null}
+      <i className="living-rail">
+        <i className="living-thumb" />
+      </i>
     </div>
   );
 }

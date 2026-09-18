@@ -124,7 +124,16 @@ const ArcCarousel = forwardRef<ArcHandle, Props>(function ArcCarousel(
       // Fully visible within 2 steps, gone by 3 — so the wrap-around jump at m/2 is never seen.
       el.style.opacity = String(Math.min(1, Math.max(0, 3 - Math.abs(o))));
       el.style.zIndex = String(100 - Math.round(Math.abs(o) * 10));
-      el.dataset.focus = closeness > 0.5 ? "1" : "0";
+      const focus = closeness > 0.5 ? "1" : "0";
+      if (el.dataset.focus !== focus) {
+        el.dataset.focus = focus;
+        // A video reel in the tile plays only while that tile is in focus.
+        const reel = el.querySelector<HTMLVideoElement>("video.living-video");
+        if (reel) {
+          if (focus === "1") void reel.play().catch(() => {});
+          else reel.pause();
+        }
+      }
       if (el.dataset.focus === "0" && el.dataset.tilt === "1") resetTilt(el);
     });
 
@@ -370,7 +379,7 @@ const ArcCarousel = forwardRef<ArcHandle, Props>(function ArcCarousel(
             <Media src={category.cover} title={category.title} accent={category.accent} />
             <LivingPreview
               src={category.preview}
-              shots={category.shots}
+              reel={category.reel}
               accent={category.accent}
               accentLight={category.accentLight}
             />

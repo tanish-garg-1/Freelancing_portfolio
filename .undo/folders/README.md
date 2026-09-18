@@ -24,7 +24,6 @@ All content lives in `content/` as JSON. **Every field is optional**, so leave a
 | `content/categories/<slug>.json` | One tile on the arc: `title`, `oneLiner`, `cover` (image), `accent` (hex like `#8b5cf6`, tints image placeholders; the dark theme uses one brass accent everywhere), `accentLight` (hex, the category colour in the light theme; falls back to clay), `order`. |
 | `content/projects/<category-slug>/<slug>.json` | One project: `title`, `summary`, `tags` (these become filter tabs), `thumbnail`, `gallery` (list of images), `liveUrl`, `videoUrl` (`.mp4`/`.webm` plays inline, anything else becomes a "Watch video" button), `problem`, `solution`, `results`, `order`. |
 
-- **Brand folders:** add `content/brands/<slug>.json` with `title`, `subtitle` (e.g. `"Makeup brand"`) and `order`, then put `"brand": "<slug>"` in each project that belongs to it. On the category page, "All" shows one folder per brand (projects without a brand stay as normal tiles); the tag buttons still list matching projects across all folders. An open folder is in the URL (`?folder=<slug>`), so it can be linked to.
 - **Adding a category:** add a JSON file to `content/categories/`. It shows up on the arc automatically.
 - **File names:** these become URLs, so use only letters, numbers, `-`, and `_`.
 - **Images:** put them in `public/images/` and reference them as `"/images/name.jpg"`, or use a full `https://` URL.

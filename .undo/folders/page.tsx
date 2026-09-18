@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import CategoryBanner from "@/components/CategoryBanner";
 import ProjectGrid from "@/components/ProjectGrid";
-import { getBrands, getCategories, getCategory, getProjects, getSite } from "@/lib/content";
+import { getCategories, getCategory, getProjects, getSite } from "@/lib/content";
 import { contactHref } from "@/lib/links";
 import { accentStyle } from "@/lib/visual";
 
@@ -21,8 +21,6 @@ export default async function CategoryPage({ params }: { params: Params }) {
   const category = getCategory((await params).category);
   if (!category) notFound();
   const projects = getProjects(category.slug);
-  // Only brands that actually have work in this category become folders.
-  const brands = getBrands().filter((b) => projects.some((p) => p.brand === b.slug));
 
   return (
     <main
@@ -38,13 +36,7 @@ export default async function CategoryPage({ params }: { params: Params }) {
         count={projects.length}
       />
       <section className="container">
-        <ProjectGrid
-          projects={projects}
-          brands={brands}
-          categoryTitle={category.title}
-          accent={category.accent}
-          hireHref={contactHref(getSite())}
-        />
+        <ProjectGrid projects={projects} accent={category.accent} hireHref={contactHref(getSite())} />
       </section>
     </main>
   );

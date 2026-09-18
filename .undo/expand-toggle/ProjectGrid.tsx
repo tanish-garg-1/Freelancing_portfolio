@@ -40,8 +40,6 @@ export default function ProjectGrid({ projects, brands = [], categoryTitle, acce
   const tags = useMemo(() => Array.from(new Set(projects.flatMap((p) => p.tags ?? []))), [projects]);
   const [active, setActive] = useState(ALL);
   const [folderSlug, setFolderSlug] = useState<string | null>(null);
-  /** "All" normally shows brand folders; expanded, it lists every project flat. */
-  const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
     const sync = () => setFolderSlug(readFolder());
@@ -107,46 +105,27 @@ export default function ProjectGrid({ projects, brands = [], categoryTitle, acce
     );
   }
 
-  // "All" groups branded work into folders unless expanded; a tag shows every match, across folders.
-  const canGroup = active === ALL && brands.length > 0;
-  const grouped = canGroup && !expanded;
+  // "All" groups branded work into folders; a tag shows every match, across folders.
+  const grouped = active === ALL && brands.length > 0;
   const shown = active === ALL ? projects : projects.filter((p) => p.tags?.includes(active));
   const loose = grouped ? shown.filter((p) => !brands.some((b) => b.slug === p.brand)) : shown;
 
   return (
     <>
-      {(tags.length > 0 || canGroup) && (
-        <div className="grid-controls">
-          {/* filter tabs only appear once projects have tags */}
-          {tags.length > 0 && (
-            <div className="filters" role="group" aria-label="Filter projects">
-              {[ALL, ...tags].map((tag) => (
-                <button
-                  key={tag}
-                  type="button"
-                  className="filter"
-                  aria-pressed={active === tag}
-                  onClick={() => setActive(tag)}
-                >
-                  {tag}
-                </button>
-              ))}
-            </div>
-          )}
-          {canGroup && (
+      {/* filter tabs only appear once projects have tags */}
+      {tags.length > 0 && (
+        <div className="filters" role="group" aria-label="Filter projects">
+          {[ALL, ...tags].map((tag) => (
             <button
+              key={tag}
               type="button"
-              role="switch"
-              aria-checked={expanded}
-              className="expand-toggle"
-              onClick={() => setExpanded((on) => !on)}
+              className="filter"
+              aria-pressed={active === tag}
+              onClick={() => setActive(tag)}
             >
-              <span className="expand-track" aria-hidden="true">
-                <span className="expand-knob" />
-              </span>
-              Expand
+              {tag}
             </button>
-          )}
+          ))}
         </div>
       )}
       <ul className="work-grid">

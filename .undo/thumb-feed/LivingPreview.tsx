@@ -1,25 +1,32 @@
-import type { CSSProperties } from "react";
+import type { CSSProperties, SyntheticEvent } from "react";
 import { accentOf } from "@/lib/visual";
 
 type Props = {
   /** Tall screenshot of real work. Without one, a sketched page in the category colour stands in. */
   src?: string;
-  /** Thumbnails of the category's projects: they scroll past as a two-column feed. */
-  shots?: string[];
+  /** Video files of the category's projects: played in turn, muted, instead of the sketch. */
+  reel?: string[];
   accent?: string;
   accentLight?: string;
 };
 
-/** Seconds for one full pass of the feed, per thumbnail, so longer lists don't scroll faster. */
-const FEED_SECONDS_PER_SHOT = 4;
-
 /**
  * "Living tile": real work moving inside the focused arc tile. A screenshot scrolls as if someone is
- * browsing it; project thumbnails drift past in two columns (left up, right down) like a feed; with
- * neither, a sketched page in the category colour scrolls. Purely decorative, so it is hidden from
- * screen readers. CSS only runs the motion while the tile is focused.
+ * browsing it; a reel of the category's videos plays one after another; with neither, a sketched page
+ * in the category colour scrolls. Purely decorative, so it is hidden from screen readers. CSS only
+ * runs the scroll while the tile is focused, and ArcCarousel plays or pauses the reel with focus.
  */
-export default function LivingPreview({ src, shots, accent, accentLight }: Props) {
+export default function LivingPreview({ src, reel, accent, accentLight }: Props) {
+  // When one video ends, the next in the reel starts in the same element.
+  const playNext = (e: SyntheticEvent<HTMLVideoElement>) => {
+    if (!reel || reel.length < 2) return;
+    const video = e.currentTarget;
+    const next = (Number(video.dataset.index ?? 0) + 1) % reel.length;
+    video.dataset.index = String(next);
+    video.src = reel[next];
+    void video.play().catch(() => {});
+  };
+
   return (
     <div
       className="living"
@@ -33,20 +40,16 @@ export default function LivingPreview({ src, shots, accent, accentLight }: Props
     >
       {src ? (
         <img className="living-shot" src={src} alt="" loading="lazy" draggable={false} />
-      ) : shots ? (
-        <div
-          className="living-feed"
-          style={{ "--feed-time": `${Math.max(12, shots.length * FEED_SECONDS_PER_SHOT)}s` } as CSSProperties}
-        >
-          {/* Each column holds its list twice, so sliding by exactly half loops without a seam. */}
-          {[shots, [...shots].reverse()].map((column, c) => (
-            <div key={c} className="living-feed-col">
-              {[...column, ...column].map((shot, i) => (
-                <img key={i} className="living-feed-shot" src={shot} alt="" loading="lazy" draggable={false} />
-              ))}
-            </div>
-          ))}
-        </div>
+      ) : reel ? (
+        <video
+          className="living-shot living-video"
+          src={reel[0]}
+          muted
+          playsInline
+          loop={reel.length === 1}
+          preload="none"
+          onEnded={playNext}
+        />
       ) : (
         <div className="living-track">
           <div className="lp-nav">
@@ -77,12 +80,9 @@ export default function LivingPreview({ src, shots, accent, accentLight }: Props
           </div>
         </div>
       )}
-      {/* The scroll-position rail belongs to a page scrolling up and down, not to an endless feed. */}
-      {!shots || src ? (
-        <i className="living-rail">
-          <i className="living-thumb" />
-        </i>
-      ) : null}
+      <i className="living-rail">
+        <i className="living-thumb" />
+      </i>
     </div>
   );
 }

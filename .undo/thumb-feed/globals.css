@@ -822,45 +822,6 @@ kbd {
 .arc-tile[data-focus="1"] .living {
   opacity: 1;
 }
-/* Thumbnail feed: two columns of project thumbnails; the left drifts up, the right drifts down. */
-.living-feed {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6%;
-  height: 100%;
-  padding: 0 7%;
-  background: var(--surface);
-}
-.living-feed-col {
-  display: flex;
-  flex-direction: column;
-  animation: living-feed var(--feed-time, 16s) linear infinite;
-  animation-play-state: paused;
-}
-.living-feed-col + .living-feed-col {
-  animation-direction: reverse;
-}
-.arc-tile[data-focus="1"] .living-feed-col {
-  animation-play-state: running;
-}
-.living-feed-shot {
-  display: block;
-  width: 100%;
-  aspect-ratio: 9 / 16;
-  /* margin, not gap: every item then takes the same space, so half the column is exactly one list */
-  margin-bottom: 12%;
-  border-radius: 8px;
-  object-fit: cover;
-}
-@keyframes living-feed {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-50%);
-  }
-}
-
 .living-track,
 .living-shot,
 .living-thumb {

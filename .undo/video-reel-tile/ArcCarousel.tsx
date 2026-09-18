@@ -368,12 +368,7 @@ const ArcCarousel = forwardRef<ArcHandle, Props>(function ArcCarousel(
             onPointerLeave={() => handleTiltEnd(slot)}
           >
             <Media src={category.cover} title={category.title} accent={category.accent} />
-            <LivingPreview
-              src={category.preview}
-              shots={category.shots}
-              accent={category.accent}
-              accentLight={category.accentLight}
-            />
+            <LivingPreview src={category.preview} accent={category.accent} accentLight={category.accentLight} />
             <span className="arc-tile-sheen" aria-hidden="true" />
             <span className="arc-tile-label">{category.title}</span>
           </div>

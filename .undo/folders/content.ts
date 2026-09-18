@@ -41,24 +41,11 @@ export type Category = {
   accentLight?: string;
   order?: number;
   projectCount: number;
-  /** The projects' thumbnails, scrolling as a feed inside the focused arc tile. */
-  shots?: string[];
-};
-
-/** A client brand (or "Demo"): projects that name it are grouped into one folder on the category page. */
-export type Brand = {
-  slug: string;
-  title: string;
-  /** One line under the folder title, e.g. "Makeup brand". */
-  subtitle?: string;
-  order?: number;
 };
 
 export type Project = {
   slug: string;
   category: string;
-  /** Slug of a file in content/brands/; the project then sits in that brand's folder. */
-  brand?: string;
   title: string;
   summary?: string;
   tags?: string[];
@@ -163,7 +150,6 @@ export function getProjects(category: string): Project[] {
       return {
         slug,
         category,
-        brand: text(raw.brand),
         title: text(raw.title) ?? humanize(slug),
         summary: text(raw.summary),
         tags: list(raw.tags, text),
@@ -180,12 +166,6 @@ export function getProjects(category: string): Project[] {
     .sort(byOrder);
 }
 
-/** What a category's projects add to its arc tile: the count, and their thumbnails for the scrolling feed. */
-function showcase(projects: Project[]) {
-  const shots = projects.flatMap((p) => (p.thumbnail ? [p.thumbnail] : []));
-  return { projectCount: projects.length, shots: shots.length ? shots : undefined };
-}
-
 export function getCategories(): Category[] {
   const dir = path.join(CONTENT_DIR, "categories");
   return slugsIn(dir)
@@ -200,22 +180,7 @@ export function getCategories(): Category[] {
         accent: text(raw.accent),
         accentLight: text(raw.accentLight),
         order: num(raw.order),
-        ...showcase(getProjects(slug)),
-      };
-    })
-    .sort(byOrder);
-}
-
-export function getBrands(): Brand[] {
-  const dir = path.join(CONTENT_DIR, "brands");
-  return slugsIn(dir)
-    .map((slug): Brand => {
-      const raw = readJson(path.join(dir, `${slug}.json`));
-      return {
-        slug,
-        title: text(raw.title) ?? humanize(slug),
-        subtitle: text(raw.subtitle),
-        order: num(raw.order),
+        projectCount: getProjects(slug).length,
       };
     })
     .sort(byOrder);

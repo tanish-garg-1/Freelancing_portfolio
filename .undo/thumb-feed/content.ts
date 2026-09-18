@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { isVideoFile } from "./visual";
 
 /*
  * The only module that reads portfolio content. Everything comes from JSON files in /content,
@@ -41,8 +42,8 @@ export type Category = {
   accentLight?: string;
   order?: number;
   projectCount: number;
-  /** The projects' thumbnails, scrolling as a feed inside the focused arc tile. */
-  shots?: string[];
+  /** The projects' own video files, played in turn inside the focused arc tile. */
+  reel?: string[];
 };
 
 /** A client brand (or "Demo"): projects that name it are grouped into one folder on the category page. */
@@ -180,10 +181,10 @@ export function getProjects(category: string): Project[] {
     .sort(byOrder);
 }
 
-/** What a category's projects add to its arc tile: the count, and their thumbnails for the scrolling feed. */
+/** What a category's projects add to its arc tile: the count, and any video files to play as a reel. */
 function showcase(projects: Project[]) {
-  const shots = projects.flatMap((p) => (p.thumbnail ? [p.thumbnail] : []));
-  return { projectCount: projects.length, shots: shots.length ? shots : undefined };
+  const reel = projects.flatMap((p) => (p.videoUrl && isVideoFile(p.videoUrl) ? [p.videoUrl] : []));
+  return { projectCount: projects.length, reel: reel.length ? reel : undefined };
 }
 
 export function getCategories(): Category[] {
